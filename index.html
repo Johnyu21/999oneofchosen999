@@ -309,20 +309,20 @@
       color: var(--ink-soft);
     }
 
-    /* ===== TOP-RIGHT: MERIDIAN INDEX NAV ===== */
+    /* ===== TOP-RIGHT: MERIDIAN INDEX NAV (STYLE I GOTHIC FRAME) ===== */
     .index-nav {
       grid-column: 3;
       grid-row: 1;
       justify-self: end;
       align-self: start;
-      width: 196px;
-      padding: 14px 16px;
-      background: rgba(244, 249, 252, 0.74);
-      border: 1px solid var(--line);
+      width: 214px;
+      padding: 6px 8px;
+      background: rgba(246, 250, 253, 0.78);
+      border: 18px solid transparent;
+      border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect x='2' y='2' width='116' height='116' fill='none' stroke='%23354f5e' stroke-opacity='0.68' stroke-width='1.5'/%3E%3Crect x='9' y='9' width='102' height='102' fill='none' stroke='%239c8861' stroke-opacity='0.88' stroke-width='1.1'/%3E%3Cg stroke='%239c8861' stroke-width='1.1' fill='%23f8fcfe'%3E%3Cpolygon points='9,4 14,9 9,14 4,9'/%3E%3Cpolygon points='111,4 116,9 111,14 106,9'/%3E%3Cpolygon points='9,106 14,111 9,116 4,111'/%3E%3Cpolygon points='111,106 116,111 111,116 106,111'/%3E%3C/g%3E%3Cg fill='%239c8861'%3E%3Cpolygon points='9,7 11,9 9,11 7,9'/%3E%3Cpolygon points='111,7 113,9 111,11 109,9'/%3E%3Cpolygon points='9,109 11,111 9,113 7,111'/%3E%3Cpolygon points='111,109 113,111 111,113 109,111'/%3E%3C/g%3E%3Cg stroke='%23b8a06e' stroke-opacity='0.65' stroke-width='0.9' fill='none'%3E%3Cpath d='M18,2 V18 H2 M102,2 V18 H118 M18,118 V102 H2 M102,118 V102 H118'/%3E%3Cpath d='M25,9 L9,25 M95,9 L111,25 M25,111 L9,95 M95,111 L111,95' stroke='%23416f89' stroke-opacity='0.45'/%3E%3C/g%3E%3C/svg%3E") 26 / 18px stretch;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 8px 24px rgba(23, 38, 49, 0.05);
-      contain: layout style paint;
+      box-shadow: 0 8px 24px rgba(23, 38, 49, 0.06);
     }
 
     .index-head {
@@ -428,6 +428,7 @@
       grid-column: 3;
     }
 
+    /* ===== STYLE I: GOTHIC LANCET & ROSE TRACERY PORTAL CARDS ===== */
     .portal-card {
       --mx: 50%;
       --my: 50%;
@@ -435,20 +436,38 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 112px;
-      padding: 15px 18px 13px;
+      min-height: 118px;
+      padding: 6px 10px 4px;
       text-decoration: none;
       color: var(--ink);
-      background: rgba(244, 249, 252, 0.72);
-      border: 1px solid var(--line);
+      background: rgba(246, 250, 253, 0.76);
+      border: 20px solid transparent;
+      border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect x='2' y='2' width='116' height='116' fill='none' stroke='%23354f5e' stroke-opacity='0.68' stroke-width='1.5'/%3E%3Crect x='9' y='9' width='102' height='102' fill='none' stroke='%239c8861' stroke-opacity='0.88' stroke-width='1.1'/%3E%3Cg stroke='%239c8861' stroke-width='1.1' fill='%23f8fcfe'%3E%3Cpolygon points='9,4 14,9 9,14 4,9'/%3E%3Cpolygon points='111,4 116,9 111,14 106,9'/%3E%3Cpolygon points='9,106 14,111 9,116 4,111'/%3E%3Cpolygon points='111,106 116,111 111,116 106,111'/%3E%3C/g%3E%3Cg fill='%239c8861'%3E%3Cpolygon points='9,7 11,9 9,11 7,9'/%3E%3Cpolygon points='111,7 113,9 111,11 109,9'/%3E%3Cpolygon points='9,109 11,111 9,113 7,111'/%3E%3Cpolygon points='111,109 113,111 111,113 109,111'/%3E%3C/g%3E%3Cg stroke='%23b8a06e' stroke-opacity='0.65' stroke-width='0.9' fill='none'%3E%3Cpath d='M18,2 V18 H2 M102,2 V18 H118 M18,118 V102 H2 M102,118 V102 H118'/%3E%3Cpath d='M25,9 L9,25 M95,9 L111,25 M25,111 L9,95 M95,111 L111,95' stroke='%23416f89' stroke-opacity='0.45'/%3E%3C/g%3E%3C/svg%3E") 26 / 20px stretch;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      overflow: hidden;
-      contain: layout style paint;
       transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.25s ease,
                   background 0.25s ease,
                   box-shadow 0.25s ease;
+    }
+
+    /* Gothic top-center rose-window crest finial */
+    .portal-card::after {
+      content: "✦";
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 9px;
+      line-height: 1;
+      color: var(--gold-accent);
+      background: rgba(248, 252, 254, 0.94);
+      border: 1px solid rgba(156, 136, 97, 0.72);
+      clip-path: polygon(50% 0%, 100% 58%, 100% 100%, 0% 100%, 0% 58%);
+      pointer-events: none;
     }
 
     /* Pointer-following sacred spotlight */
@@ -467,26 +486,12 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Precision top-left / bottom-right micro ticks */
-    .portal-card::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 28px;
-      height: 1.5px;
-      background: linear-gradient(90deg, var(--gold-accent), transparent);
-      opacity: 0.65;
-      transition: width 0.35s ease, background 0.35s ease;
-    }
-
     .portal-card:hover,
     .portal-card.is-synced,
     .portal-card.is-current {
       transform: translateY(-2px);
       background: var(--glass-hover);
-      border-color: rgba(65, 111, 137, 0.56);
-      box-shadow: 0 12px 32px rgba(23, 38, 49, 0.08), 0 0 0 1px rgba(126, 199, 230, 0.18) inset;
+      box-shadow: 0 12px 32px rgba(23, 38, 49, 0.09);
     }
 
     .portal-card:hover::before,
@@ -498,8 +503,8 @@
     .portal-card:hover::after,
     .portal-card.is-synced::after,
     .portal-card.is-current::after {
-      width: 100%;
-      background: linear-gradient(90deg, var(--core-blue), rgba(156, 136, 97, 0.55), transparent);
+      color: var(--core-blue);
+      border-color: var(--core-blue);
     }
 
     .index-link.is-current {
