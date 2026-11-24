@@ -60,7 +60,26 @@ body {
   opacity: 0.96;
   pointer-events: none;
   user-select: none;
-  transition: transform 0.8s ease;
+  will-change: transform;
+}
+
+.sanctuary-bg img {
+  animation: sanctuary-breathe 11s ease-in-out infinite;
+}
+
+@keyframes sanctuary-breathe {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1.012);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) scale(1.046);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sanctuary-bg img {
+    animation: none;
+  }
 }
 
 .sanctuary-bg::after {
