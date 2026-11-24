@@ -7,7 +7,7 @@
   <title>999one of chosen999</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <style>
     :root {
       --paper: #edf3f6;
@@ -21,6 +21,7 @@
       --gold-accent: #9c8861;
       --glass-bg: rgba(242, 247, 250, 0.56);
       --glass-hover: rgba(247, 251, 253, 0.78);
+      --font-gothic: "UnifrakturMaguntia", "Cinzel", Georgia, serif;
       --font-serif: "Cinzel", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
       --font-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
       --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -254,23 +255,23 @@
 
     .brand-title {
       margin: 0;
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: clamp(22px, 2.05vw, 32px);
-      line-height: 1.18;
-      letter-spacing: 0.08em;
+      font-family: var(--font-gothic);
+      font-weight: 400;
+      font-size: clamp(28px, 2.75vw, 42px);
+      line-height: 1.12;
+      letter-spacing: 0.04em;
       color: var(--ink);
-      text-shadow: 0 1px 18px rgba(237, 243, 246, 0.85);
+      text-shadow: 0 2px 20px rgba(237, 243, 246, 0.92);
       white-space: nowrap;
     }
 
     .brand-title .sigil-num {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      font-size: 0.78em;
+      font-family: var(--font-gothic);
+      font-weight: 400;
+      font-size: 0.92em;
       color: var(--core-blue);
-      letter-spacing: 0.14em;
-      vertical-align: 0.06em;
+      letter-spacing: 0.06em;
+      margin: 0 2px;
     }
 
     .brand-divider {
@@ -858,45 +859,45 @@
     <div class="ui-layer">
       <!-- Top-Left: Sanctuary Title -->
       <header class="brand">
-        <div class="brand-eyebrow">SANCTUARY // CHOSEN ARCHIVE</div>
+        <div class="brand-eyebrow">IN PRINCIPIO ERAT VERBUM // ✦</div>
         <h1 class="brand-title"><span class="sigil-num">999</span>one of chosen<span class="sigil-num">999</span></h1>
         <div class="brand-divider" aria-hidden="true">
           <span></span>
-          <i>◇</i>
+          <i>✦</i>
           <span></span>
         </div>
-        <p class="brand-sub">MYTHOS · MECHANISM · DIGITAL CODEX</p>
+        <p class="brand-sub">MYTHOS · MECHANISM · APOCRYPHA</p>
       </header>
 
       <!-- Top-Right: Meridian Index -->
       <nav class="index-nav" aria-label="主导航">
         <div class="index-head">
           <span>INDEX // 经纬</span>
-          <span class="status-pill"><span class="status-dot"></span>ONLINE</span>
+          <span class="status-pill"><span class="status-dot"></span>VIGIL</span>
         </div>
         <ul class="index-list">
           <li>
             <a class="index-link" href="./codex.html" data-portal="codex">
               <span><span class="roman">I.</span>启示录</span>
-              <span class="code">PROFILE</span>
+              <span class="code">造物</span>
             </a>
           </li>
           <li>
             <a class="index-link" href="./taxonomy.html" data-portal="taxonomy">
               <span><span class="roman">II.</span>谱系</span>
-              <span class="code">TAGS</span>
+              <span class="code">宇宙</span>
             </a>
           </li>
           <li>
             <a class="index-link" href="./relics.html" data-portal="relics">
               <span><span class="roman">III.</span>造物志</span>
-              <span class="code">RELICS</span>
+              <span class="code">火源</span>
             </a>
           </li>
           <li>
             <a class="index-link" href="./oracle.html" data-portal="oracle">
               <span><span class="roman">IV.</span>铭文</span>
-              <span class="code">TECH</span>
+              <span class="code">汲取</span>
             </a>
           </li>
         </ul>
@@ -908,15 +909,15 @@
           <div class="card-top">
             <span class="card-id"><span class="roman">I</span> // CODEX</span>
             <span class="card-state">
-              <span class="idle-label">FRONT VIEW</span>
-              <span class="hover-label">ENTER ↗</span>
+              <span class="idle-label">SEAL I</span>
+              <span class="hover-label">UNSEAL ↗</span>
             </span>
           </div>
           <h2 class="card-title">启示录</h2>
-          <p class="card-desc">个人简介 · 身份档案、世界观与契约坐标</p>
+          <p class="card-desc">造物 · 身世、世界观与契约坐标</p>
           <div class="card-foot">
-            <span>PROTOCOL :: 01</span>
-            <span>BIOGRAPHY</span>
+            <span>GENESIS // 01</span>
+            <span>GENESIS</span>
           </div>
         </a>
 
@@ -924,21 +925,21 @@
           <div class="card-top">
             <span class="card-id"><span class="roman">II</span> // TAXONOMY</span>
             <span class="card-state">
-              <span class="idle-label">LEFT PROFILE</span>
-              <span class="hover-label">ENTER ↗</span>
+              <span class="idle-label">SEAL II</span>
+              <span class="hover-label">UNSEAL ↗</span>
             </span>
           </div>
           <h2 class="card-title">谱系</h2>
-          <p class="card-desc">分类与标签 · 知识图谱、学科脉络与星标索引</p>
+          <p class="card-desc">宇宙 · 知识图谱、学科脉络与星标索引</p>
           <div class="card-foot">
-            <span>PROTOCOL :: 02</span>
-            <span>ARCHIVE MAP</span>
+            <span>COSMOS // 02</span>
+            <span>VELES</span>
           </div>
         </a>
       </section>
 
       <!-- Bottom-Center Telemetry -->
-      <div class="telemetry" aria-hidden="true">SYS.999 // FRONT VIEW · CODEX</div>
+      <div class="telemetry" aria-hidden="true">ALPHA ET OMEGA // 999 · SANCTUARY</div>
 
       <!-- Bottom-Right Portal Column -->
       <section class="portal-col portal-col--right" aria-label="右侧板块入口">
@@ -946,15 +947,15 @@
           <div class="card-top">
             <span class="card-id"><span class="roman">III</span> // RELICS</span>
             <span class="card-state">
-              <span class="idle-label">BACK VIEW</span>
-              <span class="hover-label">ENTER ↗</span>
+              <span class="idle-label">SEAL III</span>
+              <span class="hover-label">UNSEAL ↗</span>
             </span>
           </div>
           <h2 class="card-title">造物志</h2>
-          <p class="card-desc">项目、工具与资源 · 自研造物、精选利器与数字圣物</p>
+          <p class="card-desc">火源 · 自研造物、精选利器与数字圣物</p>
           <div class="card-foot">
-            <span>PROTOCOL :: 03</span>
-            <span>ARTIFACTS</span>
+            <span>IGNIS // 03</span>
+            <span>SVAROG</span>
           </div>
         </a>
 
@@ -962,15 +963,15 @@
           <div class="card-top">
             <span class="card-id"><span class="roman">IV</span> // ORACLE</span>
             <span class="card-state">
-              <span class="idle-label">RIGHT PROFILE</span>
-              <span class="hover-label">ENTER ↗</span>
+              <span class="idle-label">SEAL IV</span>
+              <span class="hover-label">UNSEAL ↗</span>
             </span>
           </div>
           <h2 class="card-title">铭文</h2>
-          <p class="card-desc">技术分享 · 架构笔记、AI 实践与深度手稿</p>
+          <p class="card-desc">汲取 · 架构笔记、AI 实践与深度手稿</p>
           <div class="card-foot">
-            <span>PROTOCOL :: 04</span>
-            <span>DISPATCHES</span>
+            <span>LOGOS // 04</span>
+            <span>ORACLE</span>
           </div>
         </a>
       </section>

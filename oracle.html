@@ -7,12 +7,12 @@
   <title>IV · 铭文 — 999one of chosen999</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./sanctuary.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sanctuary.css?v=4">
   <style>
     .dispatch-list {
       display: grid;
-      gap: 18px;
+      gap: 16px;
     }
 
     .dispatch-card {
@@ -31,8 +31,8 @@
       gap: 10px;
       margin-bottom: 10px;
       font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.16em;
+      font-size: 10px;
+      letter-spacing: 0.18em;
       color: var(--ink-faint);
     }
 
@@ -42,7 +42,7 @@
 
     .dispatch-card h3 {
       margin: 0 0 8px;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 500;
       letter-spacing: 0.06em;
       color: var(--ink);
@@ -52,6 +52,7 @@
       margin: 0 0 14px;
       font-size: 13.5px;
       color: var(--ink-soft);
+      line-height: 1.8;
     }
 
     .dispatch-foot {
@@ -64,25 +65,25 @@
 
     .read-hint {
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
       color: var(--core-blue);
     }
 
-    /* Reading Modal Drawer */
+    /* Reading Modal */
     .reader-overlay {
       position: fixed;
       inset: 0;
       z-index: 60;
-      background: rgba(21, 35, 45, 0.42);
-      backdrop-filter: blur(8px);
+      background: rgba(21, 35, 45, 0.45);
+      backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.28s ease;
+      transition: opacity 0.25s ease;
     }
 
     .reader-overlay.is-open {
@@ -91,15 +92,16 @@
     }
 
     .reader-sheet {
-      width: min(760px, 100%);
+      width: min(740px, 100%);
       max-height: 84vh;
       overflow-y: auto;
       padding: 32px 34px;
-      background: rgba(246, 250, 253, 0.96);
-      border: 1px solid rgba(65, 111, 137, 0.38);
+      background: rgba(248, 252, 254, 0.97);
+      border: 1px solid rgba(65, 111, 137, 0.36);
+      border-top: 2px solid var(--gold-accent);
       box-shadow: 0 24px 60px rgba(21, 35, 45, 0.18);
-      transform: translateY(12px);
-      transition: transform 0.28s ease;
+      transform: translateY(10px);
+      transition: transform 0.25s ease;
     }
 
     .reader-overlay.is-open .reader-sheet {
@@ -121,7 +123,7 @@
       border: 1px solid var(--line-strong);
       background: #ffffff;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10.5px;
       letter-spacing: 0.14em;
       color: var(--ink);
     }
@@ -135,12 +137,14 @@
       margin: 18px 0 8px;
       font-size: 15.5px;
       color: var(--ink);
+      letter-spacing: 0.06em;
     }
 
     .reader-body p {
-      margin: 0 0 12px;
+      margin: 0 0 13px;
       font-size: 14px;
       color: var(--ink-soft);
+      line-height: 1.9;
     }
 
     .reader-body pre {
@@ -177,75 +181,81 @@
 
   <main class="page-wrap">
     <section class="page-header">
-      <div class="page-eyebrow">PROTOCOL 04 // RIGHT PROFILE · TECHNICAL DISPATCHES</div>
-      <h1 class="page-title">铭文<span class="en">ORACLE · TECH SHARING</span></h1>
-      <p class="page-lead">技术分享与深度手稿 —— 点击任意一篇铭文即可在当前页面展开全文阅读。</p>
+      <div class="page-eyebrow">SEAL IV // LOGOS · 汲取</div>
+      <h1 class="page-title">铭文<span class="en">Scripturae Technicae</span></h1>
+      <p class="page-lead">架构笔记、AI 实践与深度手稿。</p>
     </section>
 
-    <div class="filter-bar" role="group" aria-label="技术主题筛选">
-      <button class="filter-btn is-active" data-topic="all" type="button">ALL // 全部铭文</button>
-      <button class="filter-btn" data-topic="visual" type="button">VISUAL // 前端视觉</button>
-      <button class="filter-btn" data-topic="ai" type="button">AI // 智能体实践</button>
-      <button class="filter-btn" data-topic="deploy" type="button">DEPLOY // 部署工程</button>
+    <blockquote class="epigraph">
+      <p class="epigraph-latin">“Nihil sub sole novum.”</p>
+      <p class="epigraph-zh">「已有的事，后必再有；日光之下，并无新事。」—— 凡渡过暗酒色之海（《奥德赛》）者，皆于沉默中记下航路。</p>
+      <cite class="epigraph-src">✦ ECCLESIASTES I : IX · 传道书 / ODYSSEY</cite>
+    </blockquote>
+
+    <div class="filter-bar" role="group" aria-label="手稿筛选">
+      <button class="filter-btn is-active" data-topic="all" type="button">✦ ALL · 全部残卷</button>
+      <button class="filter-btn" data-topic="visual" type="button">LUX · 光影视觉</button>
+      <button class="filter-btn" data-topic="ai" type="button">NOUS · 灵智实践</button>
+      <button class="filter-btn" data-topic="deploy" type="button">BASIS · 圣殿工程</button>
     </div>
 
     <section class="dispatch-list">
       <article class="glass-panel dispatch-card interactive-card" data-topic="visual" data-id="0">
         <div class="dispatch-top">
-          <span class="dispatch-num">TABLET // 01 · FRONTEND VISUAL</span>
-          <span>2026.11 · 4 MIN READ</span>
+          <span class="dispatch-num">TABLET I // LUX</span>
+          <span>ANNO MMXXVI</span>
         </div>
-        <h3>高明度神性赛博风格实践：白银、冷白与粒子层次如何避免「发灰」</h3>
-        <p>拆解浅色背景下如何通过字体反差（衬线 + 等宽）、低饱和钢蓝/古铜金粒子与半透明磨砂玻璃建立秩序感与空间纵深。</p>
+        <h3>白昼之光与冷银秩序：高明度圣殿视觉手记</h3>
+        <p>当赛博空间不再藏身于廉价的黑底霓虹，如何在冷白画布上借哥特黑体、圣银细线与微粒层次立起肃穆感。</p>
         <div class="dispatch-foot">
-          <div><span class="tag-chip">#神话赛博</span> <span class="tag-chip">#Canvas粒子</span></div>
-          <span class="read-hint">OPEN MANUSCRIPT ↗</span>
+          <div><span class="tag-chip">#神话赛博</span> <span class="tag-chip">#圣尘粒子</span></div>
+          <span class="read-hint">UNSEAL SCROLL ↗</span>
         </div>
       </article>
 
       <article class="glass-panel dispatch-card interactive-card" data-topic="visual" data-id="1">
         <div class="dispatch-top">
-          <span class="dispatch-num">TABLET // 02 · MICRO-INTERACTION</span>
-          <span>2026.11 · 3 MIN READ</span>
+          <span class="dispatch-num">TABLET II // FERRUM</span>
+          <span>ANNO MMXXVI</span>
         </div>
-        <h3>纯矢量 SVG 自定义圣银十字剑光标：0ms 热点对齐与交互态设计</h3>
-        <p>为什么原生 CSS cursor 图片在高清屏容易发糊？分享如何用固定层内联 SVG 实现零延迟精准指向、悬停核心点火与点击微动效。</p>
+        <h3>圣银十字剑光标：零延迟剑尖与微光铸造录</h3>
+        <p>放弃易糊的位图指针，以内联矢量路径重铸十字细剑，使剑尖与真实落点毫秒不差。</p>
         <div class="dispatch-foot">
-          <div><span class="tag-chip">#SVG矢量</span> <span class="tag-chip">#交互细节</span></div>
-          <span class="read-hint">OPEN MANUSCRIPT ↗</span>
+          <div><span class="tag-chip">#SVG矢量</span> <span class="tag-chip">#微交互</span></div>
+          <span class="read-hint">UNSEAL SCROLL ↗</span>
         </div>
       </article>
 
       <article class="glass-panel dispatch-card interactive-card" data-topic="ai" data-id="2">
         <div class="dispatch-top">
-          <span class="dispatch-num">TABLET // 03 · AI WORKFLOW</span>
-          <span>2026.11 · 5 MIN READ</span>
+          <span class="dispatch-num">TABLET III // NOUS</span>
+          <span>ANNO MMXXVI</span>
         </div>
-        <h3>从单张正面图到四视角一致资产：AI 图生图一致性控制心得</h3>
-        <p>在为首页打造左/背/右三视角机械天使时，如何通过锁定打光、背景色值、材质词汇与景别构图，避免角色换角度后「换人」。</p>
+        <h3>从正面圣像到四方位化身：多视角一致性的秘仪</h3>
+        <p>以单帧正视图为母印，借光影、材质与构图锚点，生成正面、左翼、背脊与右翼四位一体的机械天使。</p>
         <div class="dispatch-foot">
-          <div><span class="tag-chip">#AI-Agent</span> <span class="tag-chip">#多视角生成</span></div>
-          <span class="read-hint">OPEN MANUSCRIPT ↗</span>
+          <div><span class="tag-chip">#AI-Agent</span> <span class="tag-chip">#多视角</span></div>
+          <span class="read-hint">UNSEAL SCROLL ↗</span>
         </div>
       </article>
 
       <article class="glass-panel dispatch-card interactive-card" data-topic="deploy" data-id="3">
         <div class="dispatch-top">
-          <span class="dispatch-num">TABLET // 04 · DEPLOYMENT</span>
-          <span>2026.11 · 3 MIN READ</span>
+          <span class="dispatch-num">TABLET IV // BASIS</span>
+          <span>ANNO MMXXVI</span>
         </div>
-        <h3>GitHub Pages 静态多页站点架构：用户主站与项目子站的路由差异</h3>
-        <p>梳理仓库改名后 Pages 网址变化规律、相对路径（./）在子路径部署下的必要性，以及零构建纯静态站点的维护优势。</p>
+        <h3>零服务器圣殿：GitHub Pages 路径与缓存破除录</h3>
+        <p>无须长明之机房，仅凭静态文件、相对路径与版本印记，即可于星海之上永续悬停。</p>
         <div class="dispatch-foot">
-          <div><span class="tag-chip">#GitHub-Pages</span> <span class="tag-chip">#静态架构</span></div>
-          <span class="read-hint">OPEN MANUSCRIPT ↗</span>
+          <div><span class="tag-chip">#静态圣殿</span> <span class="tag-chip">#GitHub-Pages</span></div>
+          <span class="read-hint">UNSEAL SCROLL ↗</span>
         </div>
       </article>
     </section>
 
     <footer class="page-footer">
-      <span>SYS.999 // ORACLE · RIGHT PROFILE</span>
-      <span><a href="./relics.html">← 上一卷：III. 造物志</a> · <a href="./index.html">返回圣殿首页 ↗</a></span>
+      <span>SEAL IV // NIHIL SUB SOLE NOVUM</span>
+      <span><a href="./relics.html">← 第三印：III. 造物志</a> · <a href="./index.html">返回圣殿 ↗</a></span>
     </footer>
   </main>
 
@@ -255,64 +265,57 @@
       <div class="reader-head">
         <div>
           <div class="page-eyebrow" id="reader-meta" style="margin-bottom: 6px;"></div>
-          <h2 id="reader-title" style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: 0.06em;"></h2>
+          <h2 id="reader-title" style="margin: 0; font-size: 21px; font-weight: 500; letter-spacing: 0.06em;"></h2>
         </div>
-        <button class="reader-close" id="reader-close" type="button">CLOSE [ESC]</button>
+        <button class="reader-close" id="reader-close" type="button">SEAL [ESC]</button>
       </div>
       <div class="reader-body" id="reader-body"></div>
     </div>
   </div>
 
-  <script src="./sanctuary.js?v=3"></script>
+  <script src="./sanctuary.js?v=4"></script>
   <script>
     (function () {
       const articles = [
         {
-          meta: "TABLET // 01 · FRONTEND VISUAL",
-          title: "高明度神性赛博风格实践：白银、冷白与粒子层次如何避免「发灰」",
+          meta: "TABLET I // LUX · 光影手记",
+          title: "白昼之光与冷银秩序：高明度圣殿视觉手记",
           html: `
-            <p>大多数赛博朋克网页习惯采用纯黑底色叠加高饱和霓虹紫/青色，但当视觉主体是白银陶瓷机械天使时，保留高明度的冷白画布（<code>#edf3f6</code>）反而能建立极强的辨识度。</p>
-            <h4>1. 字体反差建立秩序</h4>
-            <p>标题使用罗马铭文感衬线体（Cinzel / Noto Serif SC）传达神话与宗教典籍的庄重，编号、状态与坐标统一用等宽字体（JetBrains Mono）传达精密仪器 HUD 的冷静。</p>
-            <h4>2. 浅色背景上的粒子调色</h4>
-            <p>纯白粒子在浅白背景上几乎不可见。将粒子色盘调整为深钢蓝（<code>rgb(46,94,124)</code>）、冰青与古铜鎏金（<code>rgb(164,132,74)</code>），并混入细微自转菱形与十字星芒，既清透又具有层次感。</p>
+            <p>世人论及机械与赛博，多沉溺于黑底与刺目霓虹；然真正的神性往往栖居于极高明度的白昼与冷银之中。</p>
+            <h4>一、字形即仪式</h4>
+            <p>以哥特黑体（UnifrakturMaguntia）镌刻圣殿名讳，以宋体承接汉文语境，以等宽字标注经纬坐标——古典经卷与精密仪器的张力便由此而生。</p>
+            <h4>二、浅幕之上的微粒</h4>
+            <p>纯白尘埃会消融于冷白底色。唯有将颗粒压至深钢蓝与古铜鎏金，并改用离线预渲染光晕贴图，方能在不耗损帧率的前提下浮现教堂光柱般的微尘。</p>
           `
         },
         {
-          meta: "TABLET // 02 · MICRO-INTERACTION",
-          title: "纯矢量 SVG 自定义圣银十字剑光标：0ms 热点对齐与交互态设计",
+          meta: "TABLET II // FERRUM · 铸剑手记",
+          title: "圣银十字剑光标：零延迟剑尖与微光铸造录",
           html: `
-            <p>系统原生 <code>cursor: url(...)</code> 在高分屏下存在尺寸上限（通常 32px~128px）且无法做平滑 CSS 过渡动画。改用 <code>position: fixed</code> 独立内联 SVG 层，就能获得无限清晰度与丰富的状态动画。</p>
-            <h4>关键实现：剑尖 0ms 对齐</h4>
-            <pre>cursorSword.style.transform = \`translate3d(\${pointerX - 2.3}px, \${pointerY - 2.3}px, 0)\`;</pre>
-            <p>把剑尖直接跟随真实指针坐标（不加插值延迟），而把柔和的冰蓝光晕（<code>.cursor-glow</code>）加上 0.16 的缓动拖尾，既有跟手精准度，又有飘逸的视觉残影。</p>
+            <p>系统原生光标受限于位图尺寸，难以承载细剑的锋芒与呼吸感。改由独立内联 SVG 随指针坐标直出，剑尖便能精准落于点击热点。</p>
+            <pre>sword.style.transform = \`translate3d(\${px - 2.3}px, \${py - 2.3}px, 0)\`;</pre>
+            <p>剑身不加插值延迟，仅令冰蓝光晕缓步尾随——既有器物之利，亦有圣光之余韵。</p>
           `
         },
         {
-          meta: "TABLET // 03 · AI WORKFLOW",
-          title: "从单张正面图到四视角一致资产：AI 图生图一致性控制心得",
+          meta: "TABLET III // NOUS · 造像手记",
+          title: "从正面圣像到四方位化身：多视角一致性的秘仪",
           html: `
-            <p>当需要给主页的 4 个板块分别配备正面、左侧面、背面、右侧面视角时，保持角色与机械结构高度一致的核心在于<strong>锁定不变锚点</strong>：</p>
-            <h4>不变锚点清单</h4>
-            <p>1. 始终以同一张无 UI 遮挡的正面高清帧作为参考图；<br>
-               2. 明确描述关键标志物（哥特尖顶银色双环光环、闭眼瓷白面容、肩部圆形涡轮机械关节、白银陶瓷装甲）；<br>
-               3. 锁定完全一致的高明度冷白摄影棚底色（<code>#edf3f6</code>），确保网页交叉淡入淡出时边缘零跳变。</p>
+            <p>欲使圣殿四印各执一方视角，最忌换角而易容。唯有锁定三道不变之锚：</p>
+            <p>其一，始终以无遮挡之正面原帧为母印；其二，严守哥特尖顶双环光环、闭目瓷容与肩部涡轮关节之形制；其三，统一高明度冷白漫射天光，使四幕交叠时宛若静默转身。</p>
           `
         },
         {
-          meta: "TABLET // 04 · DEPLOYMENT",
-          title: "GitHub Pages 静态多页站点架构：用户主站与项目子站的路由差异",
+          meta: "TABLET IV // BASIS · 基石手记",
+          title: "零服务器圣殿：GitHub Pages 路径与缓存破除录",
           html: `
-            <p>GitHub Pages 区分两类仓库：只有仓库名严格等于 <code>&lt;username&gt;.github.io</code> 时站点才会挂载在根路径；其余任意仓库名都会挂载在 <code>/&lt;repo-name&gt;/</code> 子路径下。</p>
-            <h4>最佳实践：始终使用相对路径</h4>
-            <pre>&lt;link rel="stylesheet" href="./sanctuary.css"&gt;
-&lt;a href="./codex.html"&gt;启示录&lt;/a&gt;</pre>
-            <p>使用 <code>./</code> 相对路径引用样式、脚本、图片和子页面，无论本地双击预览还是部署到任意子路径仓库，都能 100% 正常加载，绝不出现 404。</p>
+            <p>凡非以用户名命名的项目仓库，皆悬于子路径之下。一切样式、脚本与画卷皆以 <code>./</code> 相对路径相系，方能在本地与云端毫无滞碍地展开。</p>
+            <pre>&lt;link rel="stylesheet" href="./sanctuary.css?v=4"&gt;</pre>
+            <p>每次修订仪轨，递进版本印记即可令旧缓存自动退散。</p>
           `
         }
       ];
 
-      // Filter logic
       const btns = document.querySelectorAll(".filter-btn");
       const cards = document.querySelectorAll(".dispatch-card");
       btns.forEach((btn) => {
@@ -323,7 +326,6 @@
         });
       });
 
-      // Modal reader logic
       const overlay = document.getElementById("reader-overlay");
       const metaEl = document.getElementById("reader-meta");
       const titleEl = document.getElementById("reader-title");

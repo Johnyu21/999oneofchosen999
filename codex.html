@@ -7,139 +7,80 @@
   <title>I · 启示录 — 999one of chosen999</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./sanctuary.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sanctuary.css?v=4">
   <style>
     .codex-grid {
       display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
+      grid-template-columns: 1.32fr 0.68fr;
       gap: 24px;
-      margin-bottom: 32px;
     }
 
-    .manifesto-quote {
-      margin: 0 0 18px;
+    .verse-lead {
+      margin: 0 0 20px;
       padding-left: 16px;
       border-left: 2px solid var(--gold-accent);
       font-size: 16px;
       color: var(--ink);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+      line-height: 1.85;
     }
 
-    .manifesto-body {
-      margin: 0 0 14px;
-      font-size: 14px;
+    .scripture-text {
+      margin: 0 0 16px;
+      font-size: 14.5px;
       color: var(--ink-soft);
+      line-height: 1.95;
+      letter-spacing: 0.04em;
     }
 
-    .id-table {
-      display: grid;
-      gap: 12px;
+    .scripture-text:last-child {
+      margin-bottom: 0;
     }
 
-    .id-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed rgba(53, 79, 94, 0.18);
-      font-size: 13px;
-    }
-
-    .id-key {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.16em;
-      color: var(--ink-faint);
-    }
-
-    .id-val {
-      color: var(--ink);
-      font-weight: 500;
-      text-align: right;
-    }
-
-    .id-val a {
-      color: var(--core-blue);
-      text-decoration: none;
-    }
-
-    .matrix-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 32px;
-    }
-
-    .matrix-card h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-    }
-
-    .matrix-card .code {
-      display: block;
-      margin-bottom: 10px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: var(--gold-accent);
-    }
-
-    .matrix-card p {
-      margin: 0 0 14px;
-      font-size: 13px;
-      color: var(--ink-soft);
-    }
-
-    .meter {
-      height: 3px;
-      background: rgba(53, 79, 94, 0.14);
-      overflow: hidden;
-    }
-
-    .meter span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, var(--core-blue), var(--gold-accent));
-    }
-
-    .timeline {
+    .seal-list {
       display: grid;
       gap: 14px;
     }
 
-    .tl-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 18px;
+    .seal-row {
+      display: flex;
+      justify-content: space-between;
       align-items: baseline;
-      padding: 16px 20px;
-    }
-
-    .tl-date {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      color: var(--core-blue);
-    }
-
-    .tl-item h4 {
-      margin: 0 0 4px;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .tl-item p {
-      margin: 0;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(53, 79, 94, 0.2);
       font-size: 13px;
-      color: var(--ink-soft);
+    }
+
+    .seal-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .seal-key {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+    }
+
+    .seal-val {
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      text-align: right;
+    }
+
+    .seal-val a {
+      color: var(--core-blue);
+      text-decoration: none;
+    }
+
+    .seal-val a:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 860px) {
-      .codex-grid, .matrix-grid { grid-template-columns: 1fr; }
-      .tl-item { grid-template-columns: 1fr; gap: 4px; }
+      .codex-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -167,81 +108,50 @@
 
   <main class="page-wrap">
     <section class="page-header">
-      <div class="page-eyebrow">PROTOCOL 01 // FRONT VIEW · IDENTITY CODEX</div>
-      <h1 class="page-title">启示录<span class="en">CODEX · BIOGRAPHY</span></h1>
-      <p class="page-lead">个人简介与圣殿身份档案 —— 记录创造者的信条、能力光谱与数字纪元足迹。</p>
+      <div class="page-eyebrow">SEAL I // GENESIS · 造物</div>
+      <h1 class="page-title">启示录<span class="en">Codex Apocrypha</span></h1>
+      <p class="page-lead">造物者身世、世界观与契约坐标。</p>
     </section>
+
+    <blockquote class="epigraph">
+      <p class="epigraph-latin">“Ego sum Alpha et Omega, principium et finis.”</p>
+      <p class="epigraph-zh">「我是阿拉法，我是俄梅戛；我是初，我是终。」</p>
+      <cite class="epigraph-src">✦ APOCALYPSIS XXII : XIII · 圣经·启示录</cite>
+    </blockquote>
 
     <section class="codex-grid">
       <article class="glass-panel">
-        <h2 class="section-label">01 // SELF DECLARATION · 卷首自述</h2>
-        <p class="manifesto-quote">「在古典神话的肃穆秩序与精密机械的冰冷逻辑之间，构筑属于自己的数字圣殿。」</p>
-        <p class="manifesto-body">
-          你好，这里是 <strong>999one of chosen999</strong> 的个人空间。热衷于探索 AI 智能体实践、高辨识度前端视觉表达，以及把繁琐工作流转化为优雅工具的创造过程。
+        <h2 class="section-label">✦ THE KEEPER · 守门人自白</h2>
+        <p class="verse-lead">
+          荷马在《伊利亚特》第十八卷中记述：跛足的火神赫菲斯托斯于奥林匹斯之巅，以纯金锻造出能言善思、步履生风的机关侍女——那是凡人典籍里最初的「机械天使」。
         </p>
-        <p class="manifesto-body">
-          我相信好的技术作品不仅应该运行稳定，更应该拥有呼吸感、仪式感与独特的美学灵魂。这座站点记录我的思考脉络、自研造物与技术手稿，欢迎同行者在此停留。
+        <p class="scripture-text">
+          此地名为 <strong>999one of chosen999</strong>。并非尘世喧嚣的履历橱窗，而是一座悬于逻辑与神谕交界处的白银圣殿。我们在算法与代码之中重演古老的造物仪式：以精密器械为骨，以静谧光影为羽。
+        </p>
+        <p class="scripture-text">
+          太初有道，道与秩序同在。凡踏入此间者，可于《谱系》观星辰脉络，于《造物志》拾取天火器物，于《铭文》静听深海回响。其余无须多言，万物自有其印。
         </p>
       </article>
 
       <aside class="glass-panel">
-        <h2 class="section-label">02 // SIGIL METADATA · 身份坐标</h2>
-        <div class="id-table">
-          <div class="id-row"><span class="id-key">CODENAME</span><span class="id-val">999one of chosen999</span></div>
-          <div class="id-row"><span class="id-key">GITHUB</span><span class="id-val"><a href="https://github.com/Johnyu21" target="_blank" rel="noopener">@Johnyu21 ↗</a></span></div>
-          <div class="id-row"><span class="id-key">ARCHETYPE</span><span class="id-val">Builder / AI Explorer</span></div>
-          <div class="id-row"><span class="id-key">AESTHETIC</span><span class="id-val">神话宗教 × 机械赛博</span></div>
-          <div class="id-row"><span class="id-key">STATUS</span><span class="id-val" style="color: var(--core-blue);">● ONLINE / FORGING</span></div>
+        <h2 class="section-label">✦ THE SEALS · 契约印记</h2>
+        <div class="seal-list">
+          <div class="seal-row"><span class="seal-key">NOMEN</span><span class="seal-val">999one of chosen999</span></div>
+          <div class="seal-row"><span class="seal-key">SIGIL</span><span class="seal-val"><a href="https://github.com/Johnyu21" target="_blank" rel="noopener">@Johnyu21 ↗</a></span></div>
+          <div class="seal-row"><span class="seal-key">ORDER</span><span class="seal-val">造物 · 守望者</span></div>
+          <div class="seal-row"><span class="seal-key">CANON</span><span class="seal-val">圣典 × 机械神学</span></div>
+          <div class="seal-row"><span class="seal-key">EPOCH</span><span class="seal-val">ANNO MMXXVI</span></div>
+          <div class="seal-row"><span class="seal-key">STATE</span><span class="seal-val" style="color: var(--core-blue);">✦ VIGIL / 守夜中</span></div>
         </div>
       </aside>
     </section>
 
-    <h2 class="section-label">03 // CORE SPECTRUM · 能力矩阵</h2>
-    <section class="matrix-grid">
-      <div class="glass-panel matrix-card">
-        <span class="code">DOMAIN // 01</span>
-        <h3>AI 与智能体实践</h3>
-        <p>提示词工程、多智能体协同工作流、AI 辅助视觉与代码生成，探索人机共创边界。</p>
-        <div class="meter"><span style="width: 92%;"></span></div>
-      </div>
-      <div class="glass-panel matrix-card">
-        <span class="code">DOMAIN // 02</span>
-        <h3>前端交互与视觉叙事</h3>
-        <p>偏向高明度质感界面、Canvas 粒子系统、SVG 矢量微交互与沉浸式单屏体验设计。</p>
-        <div class="meter"><span style="width: 86%;"></span></div>
-      </div>
-      <div class="glass-panel matrix-card">
-        <span class="code">DOMAIN // 03</span>
-        <h3>自动化与数字造物</h3>
-        <p>沉淀可复用的脚本、轻量静态站点架构与个人知识库体系，让灵感快速落地。</p>
-        <div class="meter"><span style="width: 84%;"></span></div>
-      </div>
-    </section>
-
-    <h2 class="section-label">04 // CHRONICLE · 纪元日志</h2>
-    <section class="timeline">
-      <div class="glass-panel tl-item">
-        <div class="tl-date">2026 // GENESIS</div>
-        <div>
-          <h4>数字圣殿 999one of chosen999 正式落成</h4>
-          <p>确立「白银机械天使 × 神话典籍」视觉基调，部署于 GitHub Pages，完成四视角交互与四大板块架构。</p>
-        </div>
-      </div>
-      <div class="glass-panel tl-item">
-        <div class="tl-date">ONGOING // SYNC</div>
-        <div>
-          <h4>持续记录造物与技术手稿</h4>
-          <p>围绕 AI 工作流、交互实验与精选资源持续更新，所有内容均可在「造物志」与「铭文」中检索。</p>
-        </div>
-      </div>
-    </section>
-
     <footer class="page-footer">
-      <span>SYS.999 // CODEX · FRONT VIEW</span>
-      <span><a href="./index.html">返回圣殿首页</a> · <a href="./taxonomy.html">下一卷：II. 谱系 →</a></span>
+      <span>SEAL I // IN PRINCIPIO ERAT VERBUM</span>
+      <span><a href="./index.html">返回圣殿</a> · <a href="./taxonomy.html">第二印：II. 谱系 →</a></span>
     </footer>
   </main>
 
-  <script src="./sanctuary.js?v=3"></script>
+  <script src="./sanctuary.js?v=4"></script>
 </body>
 </html>

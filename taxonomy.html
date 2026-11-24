@@ -7,43 +7,43 @@
   <title>II · 谱系 — 999one of chosen999</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./sanctuary.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sanctuary.css?v=4">
   <style>
     .pillar-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 30px;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .pillar-card {
       text-align: left;
       width: 100%;
-      cursor: pointer;
+      padding: 18px 20px;
     }
 
     .pillar-card.is-selected {
       border-color: var(--core-blue);
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 10px 28px rgba(65, 111, 137, 0.12);
+      background: rgba(255, 255, 255, 0.92);
+      border-left: 3px solid var(--gold-accent);
     }
 
     .pillar-num {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 10.5px;
+      font-size: 10px;
       letter-spacing: 0.16em;
       color: var(--gold-accent);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .pillar-card h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
+      margin: 0 0 4px;
+      font-size: 15.5px;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--ink);
     }
 
@@ -56,31 +56,26 @@
     .tag-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 32px;
+      gap: 8px;
+      margin-bottom: 26px;
     }
 
     .tag-btn {
-      padding: 6px 13px;
-      border: 1px solid rgba(65, 111, 137, 0.25);
-      background: rgba(244, 249, 252, 0.68);
+      padding: 6px 12px;
+      border: 1px solid rgba(65, 111, 137, 0.26);
+      background: rgba(246, 250, 253, 0.84);
       color: var(--ink-soft);
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.1em;
-      transition: all 0.22s ease;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
     }
 
     .tag-btn:hover,
     .tag-btn.is-active {
-      color: var(--ink);
+      color: var(--core-blue);
       border-color: var(--core-blue);
       background: #ffffff;
-    }
-
-    .tag-btn.is-active {
-      color: var(--core-blue);
-      box-shadow: inset 0 0 0 1px rgba(65, 111, 137, 0.25);
     }
 
     .index-entries {
@@ -90,10 +85,10 @@
 
     .entry-row {
       display: grid;
-      grid-template-columns: 110px 1fr auto;
-      gap: 18px;
+      grid-template-columns: 96px 1fr auto;
+      gap: 16px;
       align-items: center;
-      padding: 16px 22px;
+      padding: 15px 20px;
       text-decoration: none;
       color: var(--ink);
     }
@@ -104,13 +99,13 @@
 
     .entry-cat {
       font-family: var(--font-mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
+      font-size: 10px;
+      letter-spacing: 0.16em;
       color: var(--gold-accent);
     }
 
     .entry-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 500;
       letter-spacing: 0.05em;
     }
@@ -122,14 +117,10 @@
       justify-content: flex-end;
     }
 
-    @media (max-width: 920px) {
-      .pillar-grid { grid-template-columns: repeat(2, 1fr); }
-      .entry-row { grid-template-columns: 1fr; gap: 8px; }
-      .entry-tags { justify-content: flex-start; }
-    }
-
-    @media (max-width: 540px) {
+    @media (max-width: 780px) {
       .pillar-grid { grid-template-columns: 1fr; }
+      .entry-row { grid-template-columns: 1fr; gap: 6px; }
+      .entry-tags { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -155,97 +146,89 @@
 
   <main class="page-wrap">
     <section class="page-header">
-      <div class="page-eyebrow">PROTOCOL 02 // LEFT PROFILE · KNOWLEDGE TAXONOMY</div>
-      <h1 class="page-title">谱系<span class="en">TAXONOMY · CATEGORIES &amp; TAGS</span></h1>
-      <p class="page-lead">分类与标签星图 —— 点击下方任意分类支柱或标签节点，实时筛选对应知识脉络。</p>
+      <div class="page-eyebrow">SEAL II // COSMOS · 宇宙</div>
+      <h1 class="page-title">谱系<span class="en">Tabula Cosmica</span></h1>
+      <p class="page-lead">分类与标签星图。</p>
     </section>
 
-    <h2 class="section-label">01 // FOUR PILLARS · 四大分类支柱</h2>
+    <blockquote class="epigraph">
+      <p class="epigraph-latin">“Quod est inferius est sicut quod est superius.”</p>
+      <p class="epigraph-zh">「如其在上，如其在下；以成太一之奇迹。」—— 斯拉夫古神韦莱斯（Veles）司掌幽冥与秘典，诸星之名皆归于此册。</p>
+      <cite class="epigraph-src">✦ TABULA SMARAGDINA · 翠玉录 / SLAVIC MYTHOS</cite>
+    </blockquote>
+
     <section class="pillar-grid">
       <button class="glass-panel pillar-card interactive-card is-selected" data-cat="all" type="button">
-        <div class="pillar-num"><span>ALL</span><span>08 ENTRIES</span></div>
-        <h3>全谱系总览</h3>
-        <p>展开所有分类下的技术分享、造物记录与视觉实验。</p>
+        <div class="pillar-num"><span>OMNIA</span><span>06</span></div>
+        <h3>诸界总览</h3>
+        <p>万象归一，展开全部星域卷宗。</p>
       </button>
       <button class="glass-panel pillar-card interactive-card" data-cat="ai" type="button">
-        <div class="pillar-num"><span>CAT // A</span><span>03 ENTRIES</span></div>
-        <h3>AI 与智能体</h3>
-        <p>Agent 工作流、提示词结构、多模态生成与自动化实践。</p>
+        <div class="pillar-num"><span>SPHERE I</span><span>02</span></div>
+        <h3>灵智之域 · AI</h3>
+        <p>智能体神谕、多视角造像与自动仪轨。</p>
       </button>
       <button class="glass-panel pillar-card interactive-card" data-cat="visual" type="button">
-        <div class="pillar-num"><span>CAT // B</span><span>03 ENTRIES</span></div>
-        <h3>视觉与前端美学</h3>
-        <p>Canvas 粒子、SVG 矢量指针、高明度赛博排版与动效。</p>
+        <div class="pillar-num"><span>SPHERE II</span><span>02</span></div>
+        <h3>光影圣仪 · 视觉</h3>
+        <p>冷白银辉、圣尘粒子与矢量圣剑。</p>
       </button>
       <button class="glass-panel pillar-card interactive-card" data-cat="infra" type="button">
-        <div class="pillar-num"><span>CAT // C</span><span>02 ENTRIES</span></div>
-        <h3>工程与部署</h3>
-        <p>GitHub Pages、静态站点优化与轻量工具链搭建。</p>
+        <div class="pillar-num"><span>SPHERE III</span><span>02</span></div>
+        <h3>界域基石 · 工程</h3>
+        <p>静态圣殿架构与星海部署律法。</p>
       </button>
     </section>
 
-    <h2 class="section-label">02 // STAR TAGS · 标签星标</h2>
-    <div class="tag-cloud" role="group" aria-label="标签筛选">
-      <button class="tag-btn is-active" data-tag="all" type="button">#ALL</button>
+    <div class="tag-cloud" role="group" aria-label="星标筛选">
+      <button class="tag-btn is-active" data-tag="all" type="button">✦ ALL</button>
       <button class="tag-btn" data-tag="ai-agent" type="button">#AI-Agent</button>
-      <button class="tag-btn" data-tag="canvas" type="button">#Canvas粒子</button>
-      <button class="tag-btn" data-tag="svg" type="button">#SVG矢量</button>
       <button class="tag-btn" data-tag="visual" type="button">#神话赛博</button>
-      <button class="tag-btn" data-tag="github-pages" type="button">#GitHub-Pages</button>
-      <button class="tag-btn" data-tag="workflow" type="button">#工作流</button>
+      <button class="tag-btn" data-tag="svg" type="button">#SVG矢量</button>
+      <button class="tag-btn" data-tag="canvas" type="button">#圣尘粒子</button>
+      <button class="tag-btn" data-tag="pages" type="button">#静态圣殿</button>
     </div>
 
-    <h2 class="section-label">03 // INDEXED NODES · 索引条目</h2>
     <section class="index-entries" id="entry-list">
       <a class="glass-panel entry-row" href="./oracle.html" data-cat="visual" data-tags="visual,canvas">
-        <span class="entry-cat">VISUAL // 01</span>
-        <span class="entry-title">高明度神性赛博风格设计笔记：为何冷白与圣银比黑底霓虹更耐看</span>
-        <span class="entry-tags"><span class="tag-chip">#神话赛博</span><span class="tag-chip">#Canvas粒子</span></span>
+        <span class="entry-cat">SPHERE II</span>
+        <span class="entry-title">白昼之光与冷银秩序：高明度圣殿视觉手记</span>
+        <span class="entry-tags"><span class="tag-chip">#神话赛博</span><span class="tag-chip">#圣尘粒子</span></span>
       </a>
       <a class="glass-panel entry-row" href="./oracle.html" data-cat="visual" data-tags="svg,visual">
-        <span class="entry-cat">VISUAL // 02</span>
-        <span class="entry-title">纯矢量 SVG 圣银十字剑光标实现：零延迟热点对齐与悬停点火动效</span>
+        <span class="entry-cat">SPHERE II</span>
+        <span class="entry-title">圣银十字剑光标：零延迟剑尖与微光铸造录</span>
         <span class="entry-tags"><span class="tag-chip">#SVG矢量</span><span class="tag-chip">#神话赛博</span></span>
       </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="ai" data-tags="ai-agent,workflow">
-        <span class="entry-cat">AI // 01</span>
-        <span class="entry-title">用多智能体协同打造个人独立站点：从视觉复刻到多视角生成</span>
-        <span class="entry-tags"><span class="tag-chip">#AI-Agent</span><span class="tag-chip">#工作流</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="infra" data-tags="github-pages,workflow">
-        <span class="entry-cat">INFRA // 01</span>
-        <span class="entry-title">零成本纯静态博客部署指南：GitHub Pages 路径规则与防踩坑记录</span>
-        <span class="entry-tags"><span class="tag-chip">#GitHub-Pages</span><span class="tag-chip">#工作流</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./relics.html" data-cat="visual" data-tags="canvas,svg">
-        <span class="entry-cat">RELIC // 01</span>
-        <span class="entry-title">999one of chosen999 四视角圣殿主页引擎（纯 HTML 零框架）</span>
-        <span class="entry-tags"><span class="tag-chip">#Canvas粒子</span><span class="tag-chip">#SVG矢量</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./relics.html" data-cat="ai" data-tags="ai-agent,visual">
-        <span class="entry-cat">RELIC // 02</span>
-        <span class="entry-title">机械天使四视图一致性生成提示词模板</span>
+      <a class="glass-panel entry-row" href="./oracle.html" data-cat="ai" data-tags="ai-agent,visual">
+        <span class="entry-cat">SPHERE I</span>
+        <span class="entry-title">从正面圣像到四方位化身：多视角一致性的秘仪</span>
         <span class="entry-tags"><span class="tag-chip">#AI-Agent</span><span class="tag-chip">#神话赛博</span></span>
       </a>
-      <a class="glass-panel entry-row" href="./relics.html" data-cat="ai" data-tags="ai-agent,workflow">
-        <span class="entry-cat">RELIC // 03</span>
-        <span class="entry-title">本地 Skills 自动化技能库与全局配置手册</span>
-        <span class="entry-tags"><span class="tag-chip">#AI-Agent</span><span class="tag-chip">#工作流</span></span>
+      <a class="glass-panel entry-row" href="./relics.html" data-cat="ai" data-tags="ai-agent">
+        <span class="entry-cat">SPHERE I</span>
+        <span class="entry-title">本地技能圣库与智能体协同仪轨</span>
+        <span class="entry-tags"><span class="tag-chip">#AI-Agent</span></span>
       </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="infra" data-tags="github-pages">
-        <span class="entry-cat">INFRA // 02</span>
-        <span class="entry-title">大体积动态视频背景在静态页面中的加载与响应式切换策略</span>
-        <span class="entry-tags"><span class="tag-chip">#GitHub-Pages</span></span>
+      <a class="glass-panel entry-row" href="./oracle.html" data-cat="infra" data-tags="pages">
+        <span class="entry-cat">SPHERE III</span>
+        <span class="entry-title">零服务器圣殿：GitHub Pages 路径与缓存破除录</span>
+        <span class="entry-tags"><span class="tag-chip">#静态圣殿</span></span>
+      </a>
+      <a class="glass-panel entry-row" href="./relics.html" data-cat="infra" data-tags="pages,canvas">
+        <span class="entry-cat">SPHERE III</span>
+        <span class="entry-title">999one of chosen999 四视角圣殿母体</span>
+        <span class="entry-tags"><span class="tag-chip">#静态圣殿</span><span class="tag-chip">#圣尘粒子</span></span>
       </a>
     </section>
 
     <footer class="page-footer">
-      <span>SYS.999 // TAXONOMY · LEFT PROFILE</span>
-      <span><a href="./codex.html">← 上一卷：I. 启示录</a> · <a href="./relics.html">下一卷：III. 造物志 →</a></span>
+      <span>SEAL II // QUOD EST INFERIUS</span>
+      <span><a href="./codex.html">← 第一印：I. 启示录</a> · <a href="./relics.html">第三印：III. 造物志 →</a></span>
     </footer>
   </main>
 
-  <script src="./sanctuary.js?v=3"></script>
+  <script src="./sanctuary.js?v=4"></script>
   <script>
     (function () {
       let currentCat = "all";
