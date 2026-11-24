@@ -8,8 +8,8 @@
   --core-blue: #416f89;
   --core-ice: #7ec7e6;
   --gold-accent: #9c8861;
-  --glass-bg: rgba(244, 249, 252, 0.72);
-  --glass-strong: rgba(248, 252, 254, 0.86);
+  --glass-bg: rgba(246, 250, 253, 0.76);
+  --glass-strong: rgba(250, 253, 255, 0.90);
   --font-serif: "Cinzel", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
   --font-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -40,7 +40,7 @@ body {
   }
 }
 
-/* ===== FIXED ATMOSPHERIC ANGEL BACKDROP ===== */
+/* ===== FIXED VIVID ANGEL BACKDROP ===== */
 .sanctuary-bg {
   position: fixed;
   inset: 0;
@@ -52,15 +52,15 @@ body {
 .sanctuary-bg img,
 .sanctuary-bg video {
   position: absolute;
-  inset: -1.5%;
-  width: 103%;
-  height: 103%;
+  inset: -1.1%;
+  width: 102.2%;
+  height: 102.2%;
   object-fit: cover;
   object-position: center center;
-  opacity: 0.42;
-  filter: saturate(0.92);
+  opacity: 0.96;
   pointer-events: none;
   user-select: none;
+  transition: transform 0.8s ease;
 }
 
 .sanctuary-bg::after {
@@ -68,8 +68,15 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(237, 243, 246, 0.78) 0%, rgba(237, 243, 246, 0.56) 35%, rgba(237, 243, 246, 0.84) 100%),
-    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.25), rgba(237, 243, 246, 0.72) 72%);
+    linear-gradient(90deg, rgba(236, 243, 247, 0.24), transparent 20%, transparent 80%, rgba(236, 243, 247, 0.22)),
+    linear-gradient(180deg, rgba(245, 248, 250, 0.22), transparent 26%, rgba(237, 243, 246, 0.28) 100%);
+  transition: background 0.45s ease;
+}
+
+.sanctuary-bg.is-scrolled::after {
+  background:
+    linear-gradient(90deg, rgba(236, 243, 247, 0.34), rgba(237, 243, 246, 0.14) 24%, rgba(237, 243, 246, 0.14) 76%, rgba(236, 243, 247, 0.32)),
+    linear-gradient(180deg, rgba(245, 248, 250, 0.32), rgba(237, 243, 246, 0.16) 35%, rgba(237, 243, 246, 0.42) 100%);
 }
 
 .particle-canvas {
@@ -91,11 +98,11 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 16px clamp(20px, 4vw, 56px);
-  background: rgba(237, 243, 246, 0.72);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  padding: 14px clamp(20px, 4vw, 56px);
+  background: rgba(237, 243, 246, 0.56);
+  border-bottom: 1px solid rgba(53, 79, 94, 0.24);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .topbar-brand {
@@ -176,15 +183,39 @@ body {
 .page-wrap {
   position: relative;
   z-index: 2;
-  max-width: 1120px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: clamp(36px, 5vw, 68px) clamp(20px, 4vw, 44px) 84px;
+  padding: clamp(28px, 4vw, 52px) clamp(20px, 4vw, 44px) 92px;
+}
+
+/* Asymmetric side-view layouts so the angel's profile & halo remain unobstructed */
+body.layout-right-offset .page-wrap {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: clamp(20px, 4.5vw, 72px);
+}
+
+body.layout-left-offset .page-wrap {
+  max-width: 760px;
+  margin-left: clamp(20px, 4.5vw, 72px);
+  margin-right: auto;
 }
 
 .page-header {
-  margin-bottom: 40px;
-  padding-bottom: 26px;
-  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(150px, 24vh, 250px);
+  padding: 18px 22px 20px;
+  background: rgba(244, 249, 252, 0.56);
+  border: 1px solid rgba(53, 79, 94, 0.20);
+  border-left: 2px solid var(--gold-accent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  max-width: 680px;
+}
+
+body.layout-right-offset .page-header,
+body.layout-left-offset .page-header {
+  margin-bottom: 34px;
+  max-width: 100%;
 }
 
 .page-eyebrow {
@@ -196,7 +227,7 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--core-blue);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .page-eyebrow::before {
@@ -207,13 +238,14 @@ body {
 }
 
 .page-title {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-family: var(--font-cn);
-  font-size: clamp(28px, 3.6vw, 44px);
+  font-size: clamp(26px, 3.2vw, 40px);
   font-weight: 500;
   letter-spacing: 0.14em;
   color: var(--ink);
   line-height: 1.25;
+  text-shadow: 0 1px 14px rgba(255, 255, 255, 0.85);
 }
 
 .page-title .en {
@@ -228,8 +260,8 @@ body {
 
 .page-lead {
   margin: 0;
-  max-width: 680px;
-  font-size: 14.5px;
+  max-width: 640px;
+  font-size: 14px;
   color: var(--ink-soft);
   letter-spacing: 0.04em;
 }
@@ -239,10 +271,10 @@ body {
   position: relative;
   padding: 24px 26px;
   background: var(--glass-bg);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 30px rgba(21, 35, 45, 0.04);
+  border: 1px solid rgba(53, 79, 94, 0.28);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+  box-shadow: 0 12px 34px rgba(21, 35, 45, 0.08);
   transition: border-color 0.28s ease, transform 0.28s ease, background 0.28s ease;
 }
 
@@ -262,22 +294,19 @@ body {
 }
 
 .section-label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
+  padding: 4px 12px;
+  background: rgba(244, 249, 252, 0.74);
+  border: 1px solid rgba(53, 79, 94, 0.18);
+  backdrop-filter: blur(8px);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.section-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(53, 79, 94, 0.24), transparent);
+  color: var(--ink);
 }
 
 /* ===== FILTER PILLS / TAGS ===== */
@@ -396,7 +425,16 @@ body {
 .cursor-sword.is-hover .sword-gem { fill: #74deff; }
 .cursor-sword.is-pressed svg { transform: translate(-2px, -2px) scale(0.92); }
 
+@media (max-width: 1120px) {
+  body.layout-right-offset .page-wrap,
+  body.layout-left-offset .page-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 900px) {
   .cursor-glow, .cursor-sword { display: none; }
   .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .page-header { margin-bottom: 32px; }
 }

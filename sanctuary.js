@@ -1,4 +1,14 @@
 (function () {
+  // 0. Subtle backdrop mist adjustment when scrolling deeper into long content
+  const bgEl = document.querySelector(".sanctuary-bg");
+  if (bgEl) {
+    const syncScroll = () => {
+      bgEl.classList.toggle("is-scrolled", window.scrollY > 140);
+    };
+    window.addEventListener("scroll", syncScroll, { passive: true });
+    syncScroll();
+  }
+
   // 1. Inject V2 Slender Holy Cross-Sword SVG Cursor on desktop fine-pointer devices
   const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
   if (supportsFinePointer) {
