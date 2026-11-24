@@ -300,10 +300,8 @@
       align-items: center;
       gap: 8px;
       padding: 4px 10px;
-      background: rgba(242, 247, 250, 0.52);
+      background: rgba(244, 249, 252, 0.76);
       border: 1px solid rgba(53, 79, 94, 0.18);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       font-family: var(--font-mono);
       font-size: 10.5px;
       letter-spacing: 0.16em;
@@ -318,11 +316,12 @@
       align-self: start;
       width: 196px;
       padding: 14px 16px;
-      background: var(--glass-bg);
+      background: rgba(244, 249, 252, 0.74);
       border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 8px 30px rgba(23, 38, 49, 0.05);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 8px 24px rgba(23, 38, 49, 0.05);
+      contain: layout style paint;
     }
 
     .index-head {
@@ -439,15 +438,16 @@
       padding: 15px 18px 13px;
       text-decoration: none;
       color: var(--ink);
-      background: var(--glass-bg);
+      background: rgba(244, 249, 252, 0.72);
       border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.3s ease,
-                  background 0.3s ease,
-                  box-shadow 0.3s ease;
+      contain: layout style paint;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.25s ease,
+                  background 0.25s ease,
+                  box-shadow 0.25s ease;
     }
 
     /* Pointer-following sacred spotlight */
@@ -660,11 +660,10 @@
 
     .cursor-glow {
       z-index: 30;
-      width: 30px;
+      width: 34px;
       aspect-ratio: 1;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(162, 219, 243, 0.36), rgba(89, 155, 187, 0.12) 45%, transparent 74%);
-      filter: blur(2px);
+      background: radial-gradient(circle, rgba(162, 219, 243, 0.34), rgba(89, 155, 187, 0.10) 45%, transparent 72%);
     }
 
     .cursor-sword {
@@ -672,8 +671,7 @@
       width: 42px;
       height: 42px;
       transform-origin: 3px 3px;
-      filter: drop-shadow(0 2px 3px rgba(18, 34, 46, 0.28));
-      transition: opacity 0.18s ease, filter 0.22s ease;
+      transition: opacity 0.18s ease;
     }
 
     .cursor-sword svg {
@@ -681,22 +679,18 @@
       height: 100%;
       display: block;
       overflow: visible;
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
       transform-origin: 3px 3px;
     }
 
     .cursor-sword .sword-energy {
       stroke: #4a92b6;
-      transition: stroke 0.22s ease;
+      transition: stroke 0.2s ease;
     }
 
     .cursor-sword .sword-gem {
       fill: #3e84a8;
-      transition: fill 0.22s ease;
-    }
-
-    .cursor-sword.is-hover {
-      filter: drop-shadow(0 0 6px rgba(108, 212, 250, 0.72)) drop-shadow(0 2px 4px rgba(18, 34, 46, 0.26));
+      transition: fill 0.2s ease;
     }
 
     .cursor-sword.is-hover svg {
@@ -1306,9 +1300,27 @@
         { r: 190, g: 158, b: 96 }    // gilded champagne highlight
       ];
 
+      // Pre-render offscreen glow sprites once (15x faster than per-frame createRadialGradient)
+      const SPRITE_SIZE = 32;
+      const glowSprites = PALETTE.map(({ r, g, b }) => {
+        const off = document.createElement("canvas");
+        off.width = SPRITE_SIZE;
+        off.height = SPRITE_SIZE;
+        const octx = off.getContext("2d");
+        const half = SPRITE_SIZE / 2;
+        const grad = octx.createRadialGradient(half, half, 0, half, half, half);
+        grad.addColorStop(0, `rgba(${Math.min(255, r + 55)}, ${Math.min(255, g + 55)}, ${Math.min(255, b + 55)}, 1)`);
+        grad.addColorStop(0.28, `rgba(${r}, ${g}, ${b}, 0.82)`);
+        grad.addColorStop(0.58, `rgba(${r}, ${g}, ${b}, 0.24)`);
+        grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+        octx.fillStyle = grad;
+        octx.fillRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+        return off;
+      });
+
       const ambientParticles = [];
       const burstParticles = [];
-      const MAX_BURST = 130;
+      const MAX_BURST = 70;
 
       const pointer = { x: -9999, y: -9999, vx: 0, vy: 0, active: false };
       let lastPointerX = 0;
@@ -1376,12 +1388,12 @@
       function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        dpr = 1;
+        canvas.width = width;
+        canvas.height = height;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-        const targetCount = Math.min(145, Math.max(68, Math.floor((width * height) / 10500)));
+        const targetCount = Math.min(82, Math.max(40, Math.floor((width * height) / 17500)));
         while (ambientParticles.length < targetCount) {
           ambientParticles.push(createAmbientParticle(true));
         }
@@ -1422,22 +1434,12 @@
       });
 
       function drawMote(p, a) {
-        const { r, g, b } = p.color;
-        // Soft outer halo
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3.1);
-        grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${(a * 0.95).toFixed(3)})`);
-        grad.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${(a * 0.32).toFixed(3)})`);
-        grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3.1, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Crisp luminous center
-        ctx.fillStyle = `rgba(${Math.min(255, r + 55)}, ${Math.min(255, g + 55)}, ${Math.min(255, b + 55)}, ${Math.min(1, a * 1.15).toFixed(3)})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, Math.max(0.7, p.size * 0.55), 0, Math.PI * 2);
-        ctx.fill();
+        const idx = PALETTE.indexOf(p.color);
+        const sprite = glowSprites[idx >= 0 ? idx : 0];
+        const radius = p.size * 3.1;
+        ctx.globalAlpha = Math.min(1, a);
+        ctx.drawImage(sprite, p.x - radius, p.y - radius, radius * 2, radius * 2);
+        ctx.globalAlpha = 1;
       }
 
       function drawDiamond(p, a) {
@@ -1485,6 +1487,10 @@
       let frame = 0;
 
       function renderParticles() {
+        if (document.hidden) {
+          requestAnimationFrame(renderParticles);
+          return;
+        }
         frame++;
         if (trailCooldown > 0) trailCooldown--;
 

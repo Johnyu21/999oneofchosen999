@@ -8,8 +8,8 @@
   --core-blue: #416f89;
   --core-ice: #7ec7e6;
   --gold-accent: #9c8861;
-  --glass-bg: rgba(246, 250, 253, 0.76);
-  --glass-strong: rgba(250, 253, 255, 0.90);
+  --glass-bg: rgba(246, 250, 253, 0.84);
+  --glass-strong: rgba(250, 253, 255, 0.94);
   --font-serif: "Cinzel", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
   --font-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -118,10 +118,10 @@ body {
   justify-content: space-between;
   gap: 20px;
   padding: 14px clamp(20px, 4vw, 56px);
-  background: rgba(237, 243, 246, 0.56);
+  background: rgba(237, 243, 246, 0.78);
   border-bottom: 1px solid rgba(53, 79, 94, 0.24);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .topbar-brand {
@@ -221,20 +221,22 @@ body.layout-left-offset .page-wrap {
 }
 
 .page-header {
-  margin-bottom: clamp(150px, 24vh, 250px);
-  padding: 6px 0 8px 18px;
-  background: transparent;
-  border: none;
+  margin-top: clamp(320px, 48vh, 450px);
+  margin-bottom: 28px;
+  padding: 20px 24px 22px;
+  background: rgba(246, 250, 253, 0.84);
+  border: 1px solid rgba(53, 79, 94, 0.24);
   border-left: 2px solid var(--gold-accent);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  max-width: 440px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(21, 35, 45, 0.06);
+  max-width: 100%;
 }
 
 body.layout-right-offset .page-header,
 body.layout-left-offset .page-header {
-  margin-bottom: 34px;
-  max-width: 100%;
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
 .page-eyebrow {
@@ -293,10 +295,11 @@ body.layout-left-offset .page-header {
   padding: 24px 26px;
   background: var(--glass-bg);
   border: 1px solid rgba(53, 79, 94, 0.28);
-  backdrop-filter: blur(14px) saturate(1.12);
-  -webkit-backdrop-filter: blur(14px) saturate(1.12);
-  box-shadow: 0 12px 34px rgba(21, 35, 45, 0.08);
-  transition: border-color 0.28s ease, transform 0.28s ease, background 0.28s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(21, 35, 45, 0.06);
+  contain: layout style paint;
+  transition: border-color 0.22s ease, transform 0.22s ease, background 0.22s ease;
 }
 
 .glass-panel::before {
@@ -320,9 +323,8 @@ body.layout-left-offset .page-header {
   gap: 10px;
   margin: 0 0 16px;
   padding: 4px 12px;
-  background: rgba(244, 249, 252, 0.74);
-  border: 1px solid rgba(53, 79, 94, 0.18);
-  backdrop-filter: blur(8px);
+  background: rgba(246, 250, 253, 0.88);
+  border: 1px solid rgba(53, 79, 94, 0.20);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.2em;
@@ -341,13 +343,12 @@ body.layout-left-offset .page-header {
 .filter-btn {
   padding: 7px 15px;
   border: 1px solid var(--line);
-  background: rgba(244, 249, 252, 0.62);
+  background: rgba(246, 250, 253, 0.86);
   color: var(--ink-soft);
   font-family: var(--font-mono);
   font-size: 11.5px;
   letter-spacing: 0.12em;
-  backdrop-filter: blur(8px);
-  transition: all 0.22s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .filter-btn:hover,
@@ -413,11 +414,10 @@ body.layout-left-offset .page-header {
 
 .cursor-glow {
   z-index: 90;
-  width: 30px;
+  width: 34px;
   aspect-ratio: 1;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(162, 219, 243, 0.36), rgba(89, 155, 187, 0.12) 45%, transparent 74%);
-  filter: blur(2px);
+  background: radial-gradient(circle, rgba(162, 219, 243, 0.34), rgba(89, 155, 187, 0.10) 45%, transparent 72%);
 }
 
 .cursor-sword {
@@ -425,8 +425,7 @@ body.layout-left-offset .page-header {
   width: 42px;
   height: 42px;
   transform-origin: 3px 3px;
-  filter: drop-shadow(0 2px 3px rgba(18, 34, 46, 0.28));
-  transition: opacity 0.18s ease, filter 0.22s ease;
+  transition: opacity 0.18s ease;
 }
 
 .cursor-sword svg {
@@ -434,13 +433,12 @@ body.layout-left-offset .page-header {
   height: 100%;
   display: block;
   overflow: visible;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
   transform-origin: 3px 3px;
 }
 
-.cursor-sword .sword-energy { stroke: #4a92b6; transition: stroke 0.22s ease; }
-.cursor-sword .sword-gem { fill: #3e84a8; transition: fill 0.22s ease; }
-.cursor-sword.is-hover { filter: drop-shadow(0 0 6px rgba(108, 212, 250, 0.72)) drop-shadow(0 2px 4px rgba(18, 34, 46, 0.26)); }
+.cursor-sword .sword-energy { stroke: #4a92b6; transition: stroke 0.2s ease; }
+.cursor-sword .sword-gem { fill: #3e84a8; transition: fill 0.2s ease; }
 .cursor-sword.is-hover svg { transform: scale(1.09) rotate(-4deg); }
 .cursor-sword.is-hover .sword-energy { stroke: #7ae0ff; }
 .cursor-sword.is-hover .sword-gem { fill: #74deff; }
@@ -457,5 +455,5 @@ body.layout-left-offset .page-header {
 @media (max-width: 900px) {
   .cursor-glow, .cursor-sword { display: none; }
   .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .page-header { margin-bottom: 32px; }
+  .page-header { margin-top: 32vh; margin-bottom: 24px; }
 }

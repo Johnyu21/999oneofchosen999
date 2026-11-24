@@ -91,6 +91,10 @@
       active = true;
       px = e.clientX;
       py = e.clientY;
+      if (window.innerWidth > 900) {
+        sword.style.opacity = "1";
+        sword.style.transform = `translate3d(${px - 2.3}px, ${py - 2.3}px, 0)`;
+      }
       const interactive = Boolean(e.target && e.target.closest && e.target.closest("a, button, [role='button'], .interactive-card"));
       sword.classList.toggle("is-hover", interactive);
     }, { passive: true });
@@ -99,18 +103,21 @@
     window.addEventListener("pointerup", () => sword.classList.remove("is-pressed"), { passive: true });
     document.addEventListener("pointerleave", () => {
       active = false;
+      sword.style.opacity = "0";
+      glow.style.opacity = "0";
       sword.classList.remove("is-hover", "is-pressed");
     });
 
     function tickCursor() {
-      if (window.innerWidth > 900) {
-        gx += (px - gx) * 0.16;
-        gy += (py - gy) * 0.16;
-        const op = active ? "1" : "0";
-        glow.style.opacity = op;
-        sword.style.opacity = op;
-        glow.style.transform = `translate3d(${gx - 15}px, ${gy - 15}px, 0)`;
-        sword.style.transform = `translate3d(${px - 2.3}px, ${py - 2.3}px, 0)`;
+      if (!document.hidden && active && window.innerWidth > 900) {
+        const dx = px - gx;
+        const dy = py - gy;
+        if (Math.abs(dx) > 0.25 || Math.abs(dy) > 0.25) {
+          gx += dx * 0.16;
+          gy += dy * 0.16;
+          glow.style.opacity = "1";
+          glow.style.transform = `translate3d(${gx - 17}px, ${gy - 17}px, 0)`;
+        }
       }
       requestAnimationFrame(tickCursor);
     }
@@ -151,11 +158,11 @@
   function resize() {
     w = window.innerWidth;
     h = window.innerHeight;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.min(65, Math.max(30, Math.floor((w * h) / 22000)));
+    dpr = 1;
+    canvas.width = w;
+    canvas.height = h;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    const count = Math.min(44, Math.max(22, Math.floor((w * h) / 32000)));
     while (motes.length < count) motes.push(spawn(true));
     if (motes.length > count) motes.length = count;
   }
@@ -164,6 +171,10 @@
   window.addEventListener("resize", resize);
 
   function loop() {
+    if (document.hidden) {
+      requestAnimationFrame(loop);
+      return;
+    }
     ctx.clearRect(0, 0, w, h);
     for (let i = 0; i < motes.length; i++) {
       const m = motes[i];
