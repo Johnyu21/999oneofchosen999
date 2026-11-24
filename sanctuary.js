@@ -1,5 +1,35 @@
 (function () {
-  // 0. Subtle backdrop mist adjustment when scrolling deeper into long content
+  // 0a. Staggered water-emergence entrance for all sanctuary frames + smooth exit dissolve
+  const emergeTargets = document.querySelectorAll(
+    ".page-header, .epigraph, .filter-bar, .tag-cloud, .glass-panel"
+  );
+  emergeTargets.forEach((el, idx) => {
+    const delay = Math.min(idx * 85 + 60, 680);
+    el.style.setProperty("--emerge-delay", `${delay}ms`);
+    el.classList.add("emerge-item");
+  });
+
+  // Reset leaving state when returning via browser back/forward cache
+  window.addEventListener("pageshow", () => {
+    document.body.classList.remove("is-leaving");
+  });
+
+  // Smooth water-dissolve exit when clicking internal sanctuary pages
+  document.addEventListener("click", (e) => {
+    const link = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#") || link.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (/^\.\/[a-z0-9_-]+\.html$/i.test(href)) {
+      e.preventDefault();
+      document.body.classList.add("is-leaving");
+      setTimeout(() => {
+        window.location.href = href;
+      }, 220);
+    }
+  });
+
+  // 0b. Subtle backdrop mist adjustment when scrolling deeper into long content
   const bgEl = document.querySelector(".sanctuary-bg");
   if (bgEl) {
     const syncScroll = () => {

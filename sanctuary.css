@@ -508,6 +508,47 @@ body.theme-style-4 .epigraph {
 .cursor-sword.is-hover .sword-gem { fill: #74deff; }
 .cursor-sword.is-pressed svg { transform: translate(-2px, -2px) scale(0.92); }
 
+/* ===== WATER-EMERGENCE ENTRANCE & EXIT ANIMATIONS ===== */
+@keyframes water-emerge {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.982);
+    filter: blur(11px);
+  }
+  65% {
+    opacity: 0.94;
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.emerge-item {
+  opacity: 0;
+  animation: water-emerge 0.88s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--emerge-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+body.is-leaving .page-wrap {
+  opacity: 0;
+  transform: translate3d(0, -10px, 0) scale(0.992);
+  filter: blur(6px);
+  transition: opacity 0.24s ease, transform 0.24s ease, filter 0.24s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emerge-item {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+}
+
 @media (max-width: 1120px) {
   body.layout-right-offset .page-wrap,
   body.layout-left-offset .page-wrap {
