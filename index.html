@@ -81,8 +81,28 @@
       transform: scale(1);
     }
 
+    .johnyu-wordmark {
+      position: absolute;
+      z-index: 1;
+      top: 22%;
+      left: 50%;
+      width: min(84vw, 1220px);
+      height: auto;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 6px 22px rgba(217, 74, 16, 0.14));
+      animation: ember-pulse 7s ease-in-out infinite;
+    }
+
+    @keyframes ember-pulse {
+      0%, 100% { opacity: 0.94; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50.4%) scale(1.008); }
+    }
+
     .hero-video {
       position: absolute;
+      z-index: 2;
       inset: -1.1%;
       width: 102.2%;
       height: 102.2%;
@@ -90,7 +110,26 @@
       object-position: center center;
       user-select: none;
       pointer-events: none;
-      background: var(--paper);
+      background: transparent;
+    }
+
+    @media (min-aspect-ratio: 4/3) {
+      .hero-video--masked {
+        -webkit-mask-image: url("./angel-front-mask.png");
+        mask-image: url("./angel-front-mask.png");
+        -webkit-mask-size: cover;
+        mask-size: cover;
+        -webkit-mask-position: center center;
+        mask-position: center center;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .johnyu-wordmark {
+        display: none;
+      }
     }
 
     .hero-still {
@@ -807,8 +846,9 @@
     <!-- 4-Angle Mechanical Angel Stage -->
     <div class="hero-stage" aria-hidden="true">
       <div class="hero-layer is-active" data-view="front">
+        <img class="johnyu-wordmark" src="./johnyu-wordmark.png" alt="Johnyu" decoding="async">
         <video
-          class="hero-video"
+          class="hero-video hero-video--masked"
           autoplay
           muted
           loop
@@ -1302,7 +1342,7 @@
         { r: 46, g: 94, b: 124 },    // deep steel core blue
         { r: 72, g: 142, b: 184 },   // crisp ice azure
         { r: 164, g: 132, b: 74 },   // sacred antique gold
-        { r: 96, g: 124, b: 142 },   // silver slate
+        { r: 214, g: 98, b: 28 },    // smoldering flame ember
         { r: 190, g: 158, b: 96 }    // gilded champagne highlight
       ];
 
