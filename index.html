@@ -882,27 +882,27 @@
         </div>
         <ul class="index-list">
           <li>
-            <a class="index-link" href="#codex" data-portal="codex">
+            <a class="index-link" href="./codex.html" data-portal="codex">
               <span><span class="roman">I.</span>启示录</span>
-              <span class="code">CODEX</span>
+              <span class="code">PROFILE</span>
             </a>
           </li>
           <li>
-            <a class="index-link" href="#taxonomy" data-portal="taxonomy">
+            <a class="index-link" href="./taxonomy.html" data-portal="taxonomy">
               <span><span class="roman">II.</span>谱系</span>
-              <span class="code">TAXON</span>
+              <span class="code">TAGS</span>
             </a>
           </li>
           <li>
-            <a class="index-link" href="#relics" data-portal="relics">
+            <a class="index-link" href="./relics.html" data-portal="relics">
               <span><span class="roman">III.</span>造物志</span>
-              <span class="code">RELIC</span>
+              <span class="code">RELICS</span>
             </a>
           </li>
           <li>
-            <a class="index-link" href="#oracle" data-portal="oracle">
+            <a class="index-link" href="./oracle.html" data-portal="oracle">
               <span><span class="roman">IV.</span>铭文</span>
-              <span class="code">ORACL</span>
+              <span class="code">TECH</span>
             </a>
           </li>
         </ul>
@@ -910,73 +910,73 @@
 
       <!-- Bottom-Left Portal Column -->
       <section class="portal-col portal-col--left" aria-label="左侧板块入口">
-        <a class="portal-card" href="#codex" data-portal="codex">
+        <a class="portal-card" href="./codex.html" data-portal="codex">
           <div class="card-top">
             <span class="card-id"><span class="roman">I</span> // CODEX</span>
             <span class="card-state">
-              <span class="idle-label">STANDBY</span>
+              <span class="idle-label">FRONT VIEW</span>
               <span class="hover-label">ENTER ↗</span>
             </span>
           </div>
           <h2 class="card-title">启示录</h2>
-          <p class="card-desc">映射内容暂定 · 预留文章与时间线归档入口</p>
+          <p class="card-desc">个人简介 · 身份档案、世界观与契约坐标</p>
           <div class="card-foot">
             <span>PROTOCOL :: 01</span>
-            <span>PENDING</span>
+            <span>BIOGRAPHY</span>
           </div>
         </a>
 
-        <a class="portal-card" href="#taxonomy" data-portal="taxonomy">
+        <a class="portal-card" href="./taxonomy.html" data-portal="taxonomy">
           <div class="card-top">
             <span class="card-id"><span class="roman">II</span> // TAXONOMY</span>
             <span class="card-state">
-              <span class="idle-label">STANDBY</span>
+              <span class="idle-label">LEFT PROFILE</span>
               <span class="hover-label">ENTER ↗</span>
             </span>
           </div>
           <h2 class="card-title">谱系</h2>
-          <p class="card-desc">映射内容暂定 · 预留分类与标签索引入口</p>
+          <p class="card-desc">分类与标签 · 知识图谱、学科脉络与星标索引</p>
           <div class="card-foot">
             <span>PROTOCOL :: 02</span>
-            <span>PENDING</span>
+            <span>ARCHIVE MAP</span>
           </div>
         </a>
       </section>
 
       <!-- Bottom-Center Telemetry -->
-      <div class="telemetry" aria-hidden="true">SYS.999 // CHOSEN PROTOCOL · CORE SYNC</div>
+      <div class="telemetry" aria-hidden="true">SYS.999 // FRONT VIEW · CODEX</div>
 
       <!-- Bottom-Right Portal Column -->
       <section class="portal-col portal-col--right" aria-label="右侧板块入口">
-        <a class="portal-card" href="#relics" data-portal="relics">
+        <a class="portal-card" href="./relics.html" data-portal="relics">
           <div class="card-top">
             <span class="card-id"><span class="roman">III</span> // RELICS</span>
             <span class="card-state">
-              <span class="idle-label">STANDBY</span>
+              <span class="idle-label">BACK VIEW</span>
               <span class="hover-label">ENTER ↗</span>
             </span>
           </div>
           <h2 class="card-title">造物志</h2>
-          <p class="card-desc">映射内容暂定 · 预留作品、工具与实验记录入口</p>
+          <p class="card-desc">项目、工具与资源 · 自研造物、精选利器与数字圣物</p>
           <div class="card-foot">
             <span>PROTOCOL :: 03</span>
-            <span>PENDING</span>
+            <span>ARTIFACTS</span>
           </div>
         </a>
 
-        <a class="portal-card" href="#oracle" data-portal="oracle">
+        <a class="portal-card" href="./oracle.html" data-portal="oracle">
           <div class="card-top">
             <span class="card-id"><span class="roman">IV</span> // ORACLE</span>
             <span class="card-state">
-              <span class="idle-label">STANDBY</span>
+              <span class="idle-label">RIGHT PROFILE</span>
               <span class="hover-label">ENTER ↗</span>
             </span>
           </div>
           <h2 class="card-title">铭文</h2>
-          <p class="card-desc">映射内容暂定 · 预留关于与友链碑文入口</p>
+          <p class="card-desc">技术分享 · 架构笔记、AI 实践与深度手稿</p>
           <div class="card-foot">
             <span>PROTOCOL :: 04</span>
-            <span>PENDING</span>
+            <span>DISPATCHES</span>
           </div>
         </a>
       </section>
@@ -1178,26 +1178,19 @@
           card.style.setProperty("--my", `${e.clientY - rect.top}px`);
         }, { passive: true });
 
-        card.addEventListener("mouseenter", () => setSyncedPortal(card.dataset.portal));
-        card.addEventListener("mouseleave", () => setSyncedPortal(null));
-
-        card.addEventListener("click", (e) => {
-          if (card.getAttribute("href").startsWith("#")) {
-            e.preventDefault();
-            switchPortalView(card.dataset.portal, false);
-          }
+        card.addEventListener("mouseenter", () => {
+          setSyncedPortal(card.dataset.portal);
+          switchPortalView(card.dataset.portal, true);
         });
+        card.addEventListener("mouseleave", () => setSyncedPortal(null));
       });
 
       navLinks.forEach((link) => {
-        link.addEventListener("mouseenter", () => setSyncedPortal(link.dataset.portal));
-        link.addEventListener("mouseleave", () => setSyncedPortal(null));
-        link.addEventListener("click", (e) => {
-          if (link.getAttribute("href").startsWith("#")) {
-            e.preventDefault();
-            switchPortalView(link.dataset.portal, false);
-          }
+        link.addEventListener("mouseenter", () => {
+          setSyncedPortal(link.dataset.portal);
+          switchPortalView(link.dataset.portal, true);
         });
+        link.addEventListener("mouseleave", () => setSyncedPortal(null));
       });
 
       // Fine pointer interactive glow & sacred astrolabe core ring

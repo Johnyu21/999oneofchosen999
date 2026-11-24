@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf3f6">
+  <title>III · 造物志 — 999one of chosen999</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sanctuary.css">
+  <style>
+    .relic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .relic-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .relic-card.is-hidden {
+      display: none;
+    }
+
+    .relic-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
+    }
+
+    .relic-type {
+      color: var(--gold-accent);
+    }
+
+    .relic-status {
+      padding: 2px 8px;
+      border: 1px solid rgba(65, 111, 137, 0.34);
+      color: var(--core-blue);
+      font-size: 9.5px;
+    }
+
+    .relic-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+
+    .relic-card p {
+      margin: 0 0 18px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+
+    .relic-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(53, 79, 94, 0.14);
+    }
+
+    .relic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .relic-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--core-blue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .relic-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 780px) {
+      .relic-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Symmetrical Back View Atmospheric Backdrop -->
+  <div class="sanctuary-bg" aria-hidden="true">
+    <img src="./angel-back.jpg" alt="">
+  </div>
+  <canvas class="particle-canvas" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="topbar-brand" href="./index.html">
+      <span class="topbar-back">← SANCTUARY</span>
+      <span class="topbar-name"><span class="num">999</span>one of chosen<span class="num">999</span></span>
+    </a>
+    <nav class="topbar-nav" aria-label="板块导航">
+      <a href="./codex.html"><span class="roman">I.</span>启示录</a>
+      <a href="./taxonomy.html"><span class="roman">II.</span>谱系</a>
+      <a class="is-active" href="./relics.html"><span class="roman">III.</span>造物志</a>
+      <a href="./oracle.html"><span class="roman">IV.</span>铭文</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <section class="page-header">
+      <div class="page-eyebrow">PROTOCOL 03 // DORSAL BACK VIEW · ARTIFACTS &amp; TOOLS</div>
+      <h1 class="page-title">造物志<span class="en">RELICS · PROJECTS &amp; RESOURCES</span></h1>
+      <p class="page-lead">自研项目、趁手工具与数字资源陈列馆 —— 每一件造物皆为灵感与秩序的结晶。</p>
+    </section>
+
+    <div class="filter-bar" role="group" aria-label="造物分类筛选">
+      <button class="filter-btn is-active" data-filter="all" type="button">ALL // 全部造物</button>
+      <button class="filter-btn" data-filter="project" type="button">PROJECTS // 自研项目</button>
+      <button class="filter-btn" data-filter="tool" type="button">TOOLS // 效率利器</button>
+      <button class="filter-btn" data-filter="resource" type="button">RESOURCES // 精选资源</button>
+    </div>
+
+    <section class="relic-grid">
+      <article class="glass-panel relic-card" data-kind="project">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">PROJECT // RELIC-01</span>
+            <span class="relic-status">LIVE</span>
+          </div>
+          <h3>999one of chosen999 · 数字圣殿</h3>
+          <p>纯静态零框架打造的「神话宗教 × 机械赛博」个人主页，内置四视角天使切换、3 层圣尘粒子引擎与纯矢量圣银十字剑光标。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">HTML5</span><span class="tag-chip">Canvas</span><span class="tag-chip">SVG</span></div>
+          <a class="relic-link" href="./index.html">PREVIEW ↗</a>
+        </div>
+      </article>
+
+      <article class="glass-panel relic-card" data-kind="project">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">PROJECT // RELIC-02</span>
+            <span class="relic-status">FORGING</span>
+          </div>
+          <h3>圣银十字剑矢量光标套件</h3>
+          <p>专为高明度冷白界面设计的可交互 SVG 光标组件，支持 0ms 热点对齐、悬停冰蓝核心点火与点击微刺反馈，可直接复用到任何静态站点。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">SVG</span><span class="tag-chip">Micro-UX</span></div>
+          <a class="relic-link" href="https://github.com/Johnyu21/999oneofchosen999" target="_blank" rel="noopener">REPO ↗</a>
+        </div>
+      </article>
+
+      <article class="glass-panel relic-card" data-kind="tool">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">TOOL // RELIC-03</span>
+            <span class="relic-status">ACTIVE</span>
+          </div>
+          <h3>AI Agent 技能管理与工作流</h3>
+          <p>整理本地可复用的 Agent Skills（网页复刻、前端审美增强、深度研究与自动化构建），实现从创意到部署的端到端提效。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">AI-Agent</span><span class="tag-chip">Skills</span></div>
+          <a class="relic-link" href="./oracle.html">NOTES ↗</a>
+        </div>
+      </article>
+
+      <article class="glass-panel relic-card" data-kind="tool">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">TOOL // RELIC-04</span>
+            <span class="relic-status">ACTIVE</span>
+          </div>
+          <h3>GitHub Pages 极简静态发布流</h3>
+          <p>免服务器、零运维的个人网站托管方案，配合纯 HTML / CSS / JS 实现秒级全球分发与自动 HTTPS 加密。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">GitHub Pages</span><span class="tag-chip">CI/CD</span></div>
+          <a class="relic-link" href="https://github.com/Johnyu21" target="_blank" rel="noopener">GITHUB ↗</a>
+        </div>
+      </article>
+
+      <article class="glass-panel relic-card" data-kind="resource">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">RESOURCE // RELIC-05</span>
+            <span class="relic-status">CURATED</span>
+          </div>
+          <h3>神谕衬线 × 机械等宽字体组合</h3>
+          <p>精选开源免费商用字体搭配：Cinzel（罗马铭文衬线）+ Noto Serif SC（思源宋体）+ JetBrains Mono（精密等宽代码体）。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">Typography</span><span class="tag-chip">Google Fonts</span></div>
+          <a class="relic-link" href="https://fonts.google.com/" target="_blank" rel="noopener">FONTS ↗</a>
+        </div>
+      </article>
+
+      <article class="glass-panel relic-card" data-kind="resource">
+        <div>
+          <div class="relic-meta">
+            <span class="relic-type">RESOURCE // RELIC-06</span>
+            <span class="relic-status">ARCHIVE</span>
+          </div>
+          <h3>多视角机械美学参考档案</h3>
+          <p>沉淀白银陶瓷材质、哥特光环结构与高明度漫反射打光的视觉关键词体系，方便后续扩展更多圣殿场景素材。</p>
+        </div>
+        <div class="relic-foot">
+          <div class="relic-tags"><span class="tag-chip">Prompt</span><span class="tag-chip">Art Direction</span></div>
+          <a class="relic-link" href="./taxonomy.html">INDEX ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <footer class="page-footer">
+      <span>SYS.999 // RELICS · DORSAL BACK VIEW</span>
+      <span><a href="./taxonomy.html">← 上一卷：II. 谱系</a> · <a href="./oracle.html">下一卷：IV. 铭文 →</a></span>
+    </footer>
+  </main>
+
+  <script src="./sanctuary.js"></script>
+  <script>
+    (function () {
+      const btns = document.querySelectorAll(".filter-btn");
+      const cards = document.querySelectorAll(".relic-card");
+      btns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const f = btn.dataset.filter;
+          btns.forEach((b) => b.classList.toggle("is-active", b === btn));
+          cards.forEach((c) => c.classList.toggle("is-hidden", f !== "all" && c.dataset.kind !== f));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

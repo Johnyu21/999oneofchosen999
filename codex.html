@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf3f6">
+  <title>I · 启示录 — 999one of chosen999</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./sanctuary.css">
+  <style>
+    .codex-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .manifesto-quote {
+      margin: 0 0 18px;
+      padding-left: 16px;
+      border-left: 2px solid var(--gold-accent);
+      font-size: 16px;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+    }
+
+    .manifesto-body {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .id-table {
+      display: grid;
+      gap: 12px;
+    }
+
+    .id-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(53, 79, 94, 0.18);
+      font-size: 13px;
+    }
+
+    .id-key {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      color: var(--ink-faint);
+    }
+
+    .id-val {
+      color: var(--ink);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .id-val a {
+      color: var(--core-blue);
+      text-decoration: none;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .matrix-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+
+    .matrix-card .code {
+      display: block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--gold-accent);
+    }
+
+    .matrix-card p {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .meter {
+      height: 3px;
+      background: rgba(53, 79, 94, 0.14);
+      overflow: hidden;
+    }
+
+    .meter span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--core-blue), var(--gold-accent));
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      align-items: baseline;
+      padding: 16px 20px;
+    }
+
+    .tl-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--core-blue);
+    }
+
+    .tl-item h4 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .tl-item p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 860px) {
+      .codex-grid, .matrix-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Front View Atmospheric Backdrop -->
+  <div class="sanctuary-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="https://rodya.top/assets/angel-hero-og-v1.jpg">
+      <source src="https://rodya.top/assets/angel-hero-loop-v2.mp4" type="video/mp4">
+    </video>
+  </div>
+  <canvas class="particle-canvas" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="topbar-brand" href="./index.html">
+      <span class="topbar-back">← SANCTUARY</span>
+      <span class="topbar-name"><span class="num">999</span>one of chosen<span class="num">999</span></span>
+    </a>
+    <nav class="topbar-nav" aria-label="板块导航">
+      <a class="is-active" href="./codex.html"><span class="roman">I.</span>启示录</a>
+      <a href="./taxonomy.html"><span class="roman">II.</span>谱系</a>
+      <a href="./relics.html"><span class="roman">III.</span>造物志</a>
+      <a href="./oracle.html"><span class="roman">IV.</span>铭文</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <section class="page-header">
+      <div class="page-eyebrow">PROTOCOL 01 // FRONT VIEW · IDENTITY CODEX</div>
+      <h1 class="page-title">启示录<span class="en">CODEX · BIOGRAPHY</span></h1>
+      <p class="page-lead">个人简介与圣殿身份档案 —— 记录创造者的信条、能力光谱与数字纪元足迹。</p>
+    </section>
+
+    <section class="codex-grid">
+      <article class="glass-panel">
+        <h2 class="section-label">01 // SELF DECLARATION · 卷首自述</h2>
+        <p class="manifesto-quote">「在古典神话的肃穆秩序与精密机械的冰冷逻辑之间，构筑属于自己的数字圣殿。」</p>
+        <p class="manifesto-body">
+          你好，这里是 <strong>999one of chosen999</strong> 的个人空间。热衷于探索 AI 智能体实践、高辨识度前端视觉表达，以及把繁琐工作流转化为优雅工具的创造过程。
+        </p>
+        <p class="manifesto-body">
+          我相信好的技术作品不仅应该运行稳定，更应该拥有呼吸感、仪式感与独特的美学灵魂。这座站点记录我的思考脉络、自研造物与技术手稿，欢迎同行者在此停留。
+        </p>
+      </article>
+
+      <aside class="glass-panel">
+        <h2 class="section-label">02 // SIGIL METADATA · 身份坐标</h2>
+        <div class="id-table">
+          <div class="id-row"><span class="id-key">CODENAME</span><span class="id-val">999one of chosen999</span></div>
+          <div class="id-row"><span class="id-key">GITHUB</span><span class="id-val"><a href="https://github.com/Johnyu21" target="_blank" rel="noopener">@Johnyu21 ↗</a></span></div>
+          <div class="id-row"><span class="id-key">ARCHETYPE</span><span class="id-val">Builder / AI Explorer</span></div>
+          <div class="id-row"><span class="id-key">AESTHETIC</span><span class="id-val">神话宗教 × 机械赛博</span></div>
+          <div class="id-row"><span class="id-key">STATUS</span><span class="id-val" style="color: var(--core-blue);">● ONLINE / FORGING</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <h2 class="section-label">03 // CORE SPECTRUM · 能力矩阵</h2>
+    <section class="matrix-grid">
+      <div class="glass-panel matrix-card">
+        <span class="code">DOMAIN // 01</span>
+        <h3>AI 与智能体实践</h3>
+        <p>提示词工程、多智能体协同工作流、AI 辅助视觉与代码生成，探索人机共创边界。</p>
+        <div class="meter"><span style="width: 92%;"></span></div>
+      </div>
+      <div class="glass-panel matrix-card">
+        <span class="code">DOMAIN // 02</span>
+        <h3>前端交互与视觉叙事</h3>
+        <p>偏向高明度质感界面、Canvas 粒子系统、SVG 矢量微交互与沉浸式单屏体验设计。</p>
+        <div class="meter"><span style="width: 86%;"></span></div>
+      </div>
+      <div class="glass-panel matrix-card">
+        <span class="code">DOMAIN // 03</span>
+        <h3>自动化与数字造物</h3>
+        <p>沉淀可复用的脚本、轻量静态站点架构与个人知识库体系，让灵感快速落地。</p>
+        <div class="meter"><span style="width: 84%;"></span></div>
+      </div>
+    </section>
+
+    <h2 class="section-label">04 // CHRONICLE · 纪元日志</h2>
+    <section class="timeline">
+      <div class="glass-panel tl-item">
+        <div class="tl-date">2026 // GENESIS</div>
+        <div>
+          <h4>数字圣殿 999one of chosen999 正式落成</h4>
+          <p>确立「白银机械天使 × 神话典籍」视觉基调，部署于 GitHub Pages，完成四视角交互与四大板块架构。</p>
+        </div>
+      </div>
+      <div class="glass-panel tl-item">
+        <div class="tl-date">ONGOING // SYNC</div>
+        <div>
+          <h4>持续记录造物与技术手稿</h4>
+          <p>围绕 AI 工作流、交互实验与精选资源持续更新，所有内容均可在「造物志」与「铭文」中检索。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>SYS.999 // CODEX · FRONT VIEW</span>
+      <span><a href="./index.html">返回圣殿首页</a> · <a href="./taxonomy.html">下一卷：II. 谱系 →</a></span>
+    </footer>
+  </main>
+
+  <script src="./sanctuary.js"></script>
+</body>
+</html>
