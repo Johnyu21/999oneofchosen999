@@ -37,9 +37,7 @@
       margin-bottom: 12px;
     }
 
-    .relic-type {
-      color: var(--gold-accent);
-    }
+    .relic-type { color: var(--gold-accent); }
 
     .relic-status {
       padding: 2px 8px;
@@ -86,9 +84,7 @@
       white-space: nowrap;
     }
 
-    .relic-link:hover {
-      text-decoration: underline;
-    }
+    .relic-link:hover { text-decoration: underline; }
 
     @media (max-width: 780px) {
       .relic-grid { grid-template-columns: 1fr; }
@@ -96,7 +92,6 @@
   </style>
 </head>
 <body class="theme-style-3">
-  <!-- Symmetrical Back View Atmospheric Backdrop -->
   <div class="sanctuary-bg" aria-hidden="true">
     <img src="./angel-back.jpg" alt="">
   </div>
@@ -119,7 +114,7 @@
     <section class="page-header">
       <div class="page-eyebrow">SEAL III // IGNIS · 火源</div>
       <h1 class="page-title">造物志<span class="en">Reliquiae Ignis</span></h1>
-      <p class="page-lead">自研造物、精选利器与数字圣物。</p>
+      <p class="page-lead">个人项目陈列馆 —— 开源项目与 Demo 作品链接。</p>
     </section>
 
     <blockquote class="epigraph">
@@ -128,74 +123,13 @@
       <cite class="epigraph-src">✦ PROMETHEUS · SVAROG THE CELESTIAL SMITH</cite>
     </blockquote>
 
-    <div class="filter-bar" role="group" aria-label="圣物筛选">
-      <button class="filter-btn is-active" data-filter="all" type="button">✦ ALL · 全部圣物</button>
-      <button class="filter-btn" data-filter="project" type="button">FORGED · 自研造物</button>
-      <button class="filter-btn" data-filter="tool" type="button">INSTRUMENTS · 利器</button>
-      <button class="filter-btn" data-filter="resource" type="button">CODICES · 典藏资源</button>
+    <div class="filter-bar" role="group" aria-label="项目类型筛选">
+      <button class="filter-btn is-active" data-filter="all" type="button">✦ ALL · 全部项目</button>
+      <button class="filter-btn" data-filter="opensource" type="button">OPEN SOURCE · 开源项目</button>
+      <button class="filter-btn" data-filter="demo" type="button">DEMO · Demo 项目</button>
     </div>
 
-    <section class="relic-grid">
-      <article class="glass-panel relic-card" data-kind="project">
-        <div>
-          <div class="relic-meta">
-            <span class="relic-type">RELIC I // FORGED</span>
-            <span class="relic-status">AWAKENED</span>
-          </div>
-          <h3>999one of chosen999 · 圣殿母体</h3>
-          <p>不借重框架，仅以纯静态代码筑成的四视角圣殿。容纳机械天使、圣尘微粒与十字银剑。</p>
-        </div>
-        <div class="relic-foot">
-          <div class="relic-tags"><span class="tag-chip">HTML5</span><span class="tag-chip">Canvas</span></div>
-          <a class="relic-link" href="./index.html">BEHOLD ↗</a>
-        </div>
-      </article>
-
-      <article class="glass-panel relic-card" data-kind="project">
-        <div>
-          <div class="relic-meta">
-            <span class="relic-type">RELIC II // FORGED</span>
-            <span class="relic-status">TEMPERED</span>
-          </div>
-          <h3>圣银十字剑矢量指针</h3>
-          <p>以纯粹矢量路径锻造的细剑光标，剑尖零延迟落点，触及可启封之印时圣核点亮。</p>
-        </div>
-        <div class="relic-foot">
-          <div class="relic-tags"><span class="tag-chip">SVG</span><span class="tag-chip">Craft</span></div>
-          <a class="relic-link" href="https://github.com/Johnyu21/999oneofchosen999" target="_blank" rel="noopener">ARCHIVE ↗</a>
-        </div>
-      </article>
-
-      <article class="glass-panel relic-card" data-kind="tool">
-        <div>
-          <div class="relic-meta">
-            <span class="relic-type">RELIC III // INSTRUMENT</span>
-            <span class="relic-status">ACTIVE</span>
-          </div>
-          <h3>智能体技能圣库</h3>
-          <p>收束于本地的各类 Agent 仪轨与技能卷轴，令繁杂之工化作一言可召的自动化协同。</p>
-        </div>
-        <div class="relic-foot">
-          <div class="relic-tags"><span class="tag-chip">AI-Agent</span><span class="tag-chip">Skills</span></div>
-          <a class="relic-link" href="./oracle.html">SCROLLS ↗</a>
-        </div>
-      </article>
-
-      <article class="glass-panel relic-card" data-kind="resource">
-        <div>
-          <div class="relic-meta">
-            <span class="relic-type">RELIC IV // CODEX</span>
-            <span class="relic-status">CURATED</span>
-          </div>
-          <h3>哥特黑体 × 碑文衬线字谱</h3>
-          <p>UnifrakturMaguntia 古典哥特黑体、Cinzel 罗马碑文与思源宋体，为数字文本赋予手抄本的庄严。</p>
-        </div>
-        <div class="relic-foot">
-          <div class="relic-tags"><span class="tag-chip">Gothic</span><span class="tag-chip">Type</span></div>
-          <a class="relic-link" href="https://fonts.google.com/" target="_blank" rel="noopener">SOURCE ↗</a>
-        </div>
-      </article>
-    </section>
+    <section class="relic-grid" id="relic-grid"></section>
 
     <footer class="page-footer">
       <span>SEAL III // IGNIS CAELESTIS</span>
@@ -205,16 +139,52 @@
 
   <script src="./sanctuary.js?v=6"></script>
   <script>
-    (function () {
+    (async function () {
+      const grid = document.getElementById("relic-grid");
       const btns = document.querySelectorAll(".filter-btn");
-      const cards = document.querySelectorAll(".relic-card");
-      btns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const f = btn.dataset.filter;
-          btns.forEach((b) => b.classList.toggle("is-active", b === btn));
-          cards.forEach((c) => c.classList.toggle("is-hidden", f !== "all" && c.dataset.kind !== f));
+      const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+      function esc(str) {
+        return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+      }
+
+      try {
+        const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
+        const projects = data.projects || [];
+
+        grid.innerHTML = projects.map((p, idx) => {
+          const isExternal = /^https?:\/\//i.test(p.url || "");
+          const typeLabel = p.kind === "demo" ? "DEMO" : "OPEN SOURCE";
+          return `
+            <article class="glass-panel relic-card" data-kind="${esc(p.kind || "opensource")}">
+              <div>
+                <div class="relic-meta">
+                  <span class="relic-type">RELIC ${romans[idx] || (idx + 1)} // ${typeLabel}</span>
+                  <span class="relic-status">${esc(p.status || "LIVE")}</span>
+                </div>
+                <h3>${esc(p.title)}</h3>
+                <p>${esc(p.desc)}</p>
+              </div>
+              <div class="relic-foot">
+                <div class="relic-tags">${(p.tags || []).map((t) => `<span class="tag-chip">${esc(t)}</span>`).join("")}</div>
+                <a class="relic-link" href="${esc(p.url || "#")}" ${isExternal ? 'target="_blank" rel="noopener"' : ""}>${esc(p.linkLabel || "OPEN ↗")}</a>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        const cards = grid.querySelectorAll(".relic-card");
+        btns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const f = btn.dataset.filter;
+            btns.forEach((b) => b.classList.toggle("is-active", b === btn));
+            cards.forEach((c) => c.classList.toggle("is-hidden", f !== "all" && c.dataset.kind !== f));
+          });
         });
-      });
+      } catch (err) {
+        grid.innerHTML = '<div class="glass-panel">暂未加载到项目数据（请通过 HTTP/GitHub Pages 访问）。</div>';
+      }
     })();
   </script>
 </body>

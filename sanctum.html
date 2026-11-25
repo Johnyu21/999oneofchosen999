@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sanctum · 隐藏内容控制台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #edf3f6;
+      --ink: #15232d;
+      --ink-soft: #4e6270;
+      --line: rgba(53, 79, 94, 0.24);
+      --core-blue: #416f89;
+      --gold: #9c8861;
+      --danger: #a83c3c;
+      --ok: #2d7a53;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      font-family: "UnifrakturMaguntia", serif;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .brand span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button, .btn-link {
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    button:hover, .btn-link:hover {
+      border-color: var(--core-blue);
+      color: var(--core-blue);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #f4f9fc;
+      border-color: var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--core-blue);
+      border-color: var(--core-blue);
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      color: var(--danger);
+      border-color: rgba(168, 60, 60, 0.35);
+    }
+
+    .btn-danger:hover {
+      background: var(--danger);
+      color: #ffffff;
+      border-color: var(--danger);
+    }
+
+    .panel {
+      background: rgba(252, 254, 255, 0.92);
+      border: 1px solid var(--line);
+      border-left: 2px solid var(--gold);
+      padding: 20px 22px;
+      margin-bottom: 22px;
+    }
+
+    .panel-title {
+      margin: 0 0 14px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--core-blue);
+      text-transform: uppercase;
+    }
+
+    .auth-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-bottom: 5px;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 13.5px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--core-blue);
+    }
+
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+      line-height: 1.75;
+    }
+
+    .status-bar {
+      margin-top: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .status-bar.ok { color: var(--ok); }
+    .status-bar.err { color: var(--danger); }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab-btn.is-active {
+      background: var(--ink);
+      color: #ffffff;
+      border-color: var(--ink);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .item-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .list-card {
+      padding: 12px 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .list-card:hover,
+    .list-card.is-selected {
+      border-color: var(--core-blue);
+      border-left: 3px solid var(--gold);
+      background: #f7fbfd;
+    }
+
+    .list-card-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .list-card-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin: 6px 0 0;
+    }
+
+    @media (max-width: 860px) {
+      .auth-grid, .workspace, .row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 class="brand">999one of chosen999 <span>// HIDDEN SANCTUM EDITOR</span></h1>
+      <div class="header-actions">
+        <a class="btn-link" href="./index.html">← 返回站点预览</a>
+        <button id="btn-download" type="button">导出 content.json</button>
+        <button class="btn-primary" id="btn-publish" type="button">✦ 保存并发布到 GitHub</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-title">01 // GITHUB 授权配置（Token 仅保存在你当前浏览器本地，绝不上传）</div>
+      <div class="auth-grid">
+        <div>
+          <label for="gh-token">GitHub Personal Access Token (Fine-grained · Contents: Read &amp; Write)</label>
+          <input id="gh-token" type="password" placeholder="粘贴 github_pat_... 或 ghp_...">
+        </div>
+        <div>
+          <label for="gh-repo">目标仓库（owner/repo）</label>
+          <input id="gh-repo" type="text" value="Johnyu21/999oneofchosen999">
+        </div>
+        <button id="btn-sync" type="button">拉取最新数据</button>
+      </div>
+      <div class="status-bar" id="status-bar">就绪：修改下方项目或文章后，点击右上角「保存并发布到 GitHub」即可全网同步。</div>
+    </section>
+
+    <div class="tabs">
+      <button class="tab-btn is-active" data-tab="articles" type="button">IV · 铭文（博客文章）</button>
+      <button class="tab-btn" data-tab="projects" type="button">III · 造物志（开源 / Demo 项目）</button>
+    </div>
+
+    <section class="workspace">
+      <div class="panel" style="margin-bottom: 0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <span class="panel-title" id="list-heading" style="margin:0;">文章列表</span>
+          <button id="btn-add" type="button">+ 新增</button>
+        </div>
+        <div class="item-list" id="item-list"></div>
+      </div>
+
+      <div class="panel" style="margin-bottom: 0;" id="editor-panel">
+        <div class="panel-title" id="editor-heading">编辑内容</div>
+        <div id="editor-form"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const TOKEN_KEY = "sanctum_gh_token";
+      const REPO_KEY = "sanctum_gh_repo";
+      const DRAFT_KEY = "sanctum_content_draft";
+
+      const tokenInput = document.getElementById("gh-token");
+      const repoInput = document.getElementById("gh-repo");
+      const statusBar = document.getElementById("status-bar");
+      const listEl = document.getElementById("item-list");
+      const listHeading = document.getElementById("list-heading");
+      const editorHeading = document.getElementById("editor-heading");
+      const editorForm = document.getElementById("editor-form");
+      const tabBtns = document.querySelectorAll(".tab-btn");
+
+      tokenInput.value = localStorage.getItem(TOKEN_KEY) || "";
+      repoInput.value = localStorage.getItem(REPO_KEY) || "Johnyu21/999oneofchosen999";
+
+      tokenInput.addEventListener("input", () => localStorage.setItem(TOKEN_KEY, tokenInput.value.trim()));
+      repoInput.addEventListener("input", () => localStorage.setItem(REPO_KEY, repoInput.value.trim()));
+
+      let data = { projects: [], articles: [] };
+      let currentTab = "articles";
+      let selectedIdx = 0;
+
+      function setStatus(msg, type) {
+        statusBar.textContent = msg;
+        statusBar.className = "status-bar" + (type ? " " + type : "");
+      }
+
+      function saveDraft() {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+      }
+
+      function toBase64Utf8(str) {
+        const bytes = new TextEncoder().encode(str);
+        let binary = "";
+        bytes.forEach((b) => { binary += String.fromCharCode(b); });
+        return btoa(binary);
+      }
+
+      function esc(str) {
+        return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+      }
+
+      async function loadInitialData() {
+        try {
+          const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
+          if (res.ok) {
+            data = await res.json();
+            setStatus("已加载站点当前 content.json 数据。", "ok");
+          }
+        } catch (e) {
+          const cached = localStorage.getItem(DRAFT_KEY);
+          if (cached) {
+            data = JSON.parse(cached);
+            setStatus("已加载本地草稿数据。");
+          }
+        }
+        render();
+      }
+
+      function render() {
+        const list = currentTab === "articles" ? data.articles : data.projects;
+        listHeading.textContent = currentTab === "articles" ? `博客文章（${list.length}）` : `项目列表（${list.length}）`;
+        if (selectedIdx >= list.length) selectedIdx = Math.max(0, list.length - 1);
+
+        const topicMap = { reflection: "感悟", craft: "技巧", experience: "经验" };
+        listEl.innerHTML = list.map((item, i) => {
+          const meta = currentTab === "articles"
+            ? `${topicMap[item.topic] || "文章"} // ${item.date || ""}`
+            : `${item.kind === "demo" ? "DEMO" : "开源项目"} // ${item.status || "LIVE"}`;
+          return `
+            <div class="list-card ${i === selectedIdx ? "is-selected" : ""}" data-idx="${i}">
+              <div class="list-card-meta">${esc(meta)}</div>
+              <p class="list-card-title">${esc(item.title || "未命名")}</p>
+            </div>
+          `;
+        }).join("") || '<p class="hint">暂无条目，点击右上角「+ 新增」创建。</p>';
+
+        listEl.querySelectorAll(".list-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            selectedIdx = Number(card.dataset.idx);
+            render();
+          });
+        });
+
+        renderEditor();
+      }
+
+      function renderEditor() {
+        const list = currentTab === "articles" ? data.articles : data.projects;
+        const item = list[selectedIdx];
+        if (!item) {
+          editorHeading.textContent = "编辑内容";
+          editorForm.innerHTML = '<p class="hint">请先在左侧选择或新增一条内容。</p>';
+          return;
+        }
+
+        if (currentTab === "articles") {
+          editorHeading.textContent = "编辑博客文章（自动同步至 II. 谱系 & IV. 铭文）";
+          editorForm.innerHTML = `
+            <div class="form-grid">
+              <div>
+                <label>文章标题</label>
+                <input id="f-title" value="${esc(item.title)}">
+              </div>
+              <div class="row-2">
+                <div>
+                  <label>分类（对应 II. 谱系 与 IV. 铭文）</label>
+                  <select id="f-topic">
+                    <option value="reflection" ${item.topic === "reflection" ? "selected" : ""}>感悟</option>
+                    <option value="craft" ${item.topic === "craft" ? "selected" : ""}>技巧</option>
+                    <option value="experience" ${item.topic === "experience" ? "selected" : ""}>经验</option>
+                  </select>
+                </div>
+                <div>
+                  <label>日期（如 2026.11）</label>
+                  <input id="f-date" value="${esc(item.date)}">
+                </div>
+              </div>
+              <div>
+                <label>标签（英文逗号分隔，如 AI实践, 后端工程）</label>
+                <input id="f-tags" value="${esc((item.tags || []).join(", "))}">
+              </div>
+              <div>
+                <label>列表摘要（1~2 句话）</label>
+                <input id="f-summary" value="${esc(item.summary)}">
+              </div>
+              <div>
+                <label>正文内容（空行分段，## 开头为小标题，\`\`\` 包裹代码块）</label>
+                <textarea id="f-body">${esc(item.body)}</textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" id="btn-up">↑ 上移</button>
+                <button type="button" id="btn-down">↓ 下移</button>
+                <button type="button" class="btn-danger" id="btn-del">删除此文章</button>
+              </div>
+            </div>
+          `;
+
+          const bind = () => {
+            item.title = document.getElementById("f-title").value;
+            item.topic = document.getElementById("f-topic").value;
+            item.date = document.getElementById("f-date").value;
+            item.tags = document.getElementById("f-tags").value.split(/[,，]/).map((s) => s.trim()).filter(Boolean);
+            item.summary = document.getElementById("f-summary").value;
+            item.body = document.getElementById("f-body").value;
+            saveDraft();
+            const activeTitle = listEl.querySelector(".list-card.is-selected .list-card-title");
+            if (activeTitle) activeTitle.textContent = item.title || "未命名";
+          };
+          ["f-title", "f-topic", "f-date", "f-tags", "f-summary", "f-body"].forEach((id) => {
+            document.getElementById(id).addEventListener("input", bind);
+          });
+        } else {
+          editorHeading.textContent = "编辑项目链接（自动同步至 II. 谱系 & III. 造物志）";
+          editorForm.innerHTML = `
+            <div class="form-grid">
+              <div>
+                <label>项目名称</label>
+                <input id="f-title" value="${esc(item.title)}">
+              </div>
+              <div class="row-2">
+                <div>
+                  <label>项目类型</label>
+                  <select id="f-kind">
+                    <option value="opensource" ${item.kind === "opensource" ? "selected" : ""}>开源项目</option>
+                    <option value="demo" ${item.kind === "demo" ? "selected" : ""}>Demo 项目</option>
+                  </select>
+                </div>
+                <div>
+                  <label>状态徽章（如 LIVE / DEMO / FORGING）</label>
+                  <input id="f-status" value="${esc(item.status)}">
+                </div>
+              </div>
+              <div class="row-2">
+                <div>
+                  <label>项目链接（GitHub 或在线 Demo 地址）</label>
+                  <input id="f-url" value="${esc(item.url)}">
+                </div>
+                <div>
+                  <label>按钮文字（如 GITHUB ↗ / DEMO ↗）</label>
+                  <input id="f-linkLabel" value="${esc(item.linkLabel)}">
+                </div>
+              </div>
+              <div>
+                <label>标签（逗号分隔，如 Python, AI实践）</label>
+                <input id="f-tags" value="${esc((item.tags || []).join(", "))}">
+              </div>
+              <div>
+                <label>一句话项目简介</label>
+                <textarea id="f-desc" style="min-height:96px;">${esc(item.desc)}</textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" id="btn-up">↑ 上移</button>
+                <button type="button" id="btn-down">↓ 下移</button>
+                <button type="button" class="btn-danger" id="btn-del">删除此项目</button>
+              </div>
+            </div>
+          `;
+
+          const bind = () => {
+            item.title = document.getElementById("f-title").value;
+            item.kind = document.getElementById("f-kind").value;
+            item.status = document.getElementById("f-status").value;
+            item.url = document.getElementById("f-url").value;
+            item.linkLabel = document.getElementById("f-linkLabel").value;
+            item.tags = document.getElementById("f-tags").value.split(/[,，]/).map((s) => s.trim()).filter(Boolean);
+            item.desc = document.getElementById("f-desc").value;
+            saveDraft();
+            const activeTitle = listEl.querySelector(".list-card.is-selected .list-card-title");
+            if (activeTitle) activeTitle.textContent = item.title || "未命名";
+          };
+          ["f-title", "f-kind", "f-status", "f-url", "f-linkLabel", "f-tags", "f-desc"].forEach((id) => {
+            document.getElementById(id).addEventListener("input", bind);
+          });
+        }
+
+        document.getElementById("btn-up").addEventListener("click", () => {
+          if (selectedIdx <= 0) return;
+          [list[selectedIdx - 1], list[selectedIdx]] = [list[selectedIdx], list[selectedIdx - 1]];
+          selectedIdx--;
+          saveDraft();
+          render();
+        });
+        document.getElementById("btn-down").addEventListener("click", () => {
+          if (selectedIdx >= list.length - 1) return;
+          [list[selectedIdx + 1], list[selectedIdx]] = [list[selectedIdx], list[selectedIdx + 1]];
+          selectedIdx++;
+          saveDraft();
+          render();
+        });
+        document.getElementById("btn-del").addEventListener("click", () => {
+          if (!confirm("确定删除这条内容吗？（点击右上角发布后才会同步到线上）")) return;
+          list.splice(selectedIdx, 1);
+          selectedIdx = Math.max(0, selectedIdx - 1);
+          saveDraft();
+          render();
+        });
+      }
+
+      tabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          currentTab = btn.dataset.tab;
+          selectedIdx = 0;
+          tabBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+          render();
+        });
+      });
+
+      document.getElementById("btn-add").addEventListener("click", () => {
+        const id = "item-" + Date.now();
+        if (currentTab === "articles") {
+          const now = new Date();
+          const ym = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}`;
+          data.articles.unshift({
+            id,
+            topic: "reflection",
+            date: ym,
+            title: "新铭文短札",
+            summary: "一句话概括核心洞察或踩坑结论。",
+            tags: ["感悟"],
+            body: "在这里写下你的正文内容……"
+          });
+        } else {
+          data.projects.unshift({
+            id,
+            kind: "opensource",
+            title: "新项目名称",
+            status: "LIVE",
+            desc: "一句话介绍这个项目解决什么问题。",
+            tags: ["开源项目"],
+            url: "https://github.com/Johnyu21",
+            linkLabel: "GITHUB ↗"
+          });
+        }
+        selectedIdx = 0;
+        saveDraft();
+        render();
+      });
+
+      document.getElementById("btn-download").addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json;charset=utf-8" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "content.json";
+        a.click();
+        setStatus("已导出 content.json 到本地下载目录。", "ok");
+      });
+
+      document.getElementById("btn-sync").addEventListener("click", async () => {
+        const token = tokenInput.value.trim();
+        const repo = repoInput.value.trim();
+        if (!repo) return setStatus("请填写目标仓库（例如 Johnyu21/999oneofchosen999）。", "err");
+        setStatus("正在从 GitHub 拉取最新 content.json ...");
+        try {
+          const headers = { Accept: "application/vnd.github+json" };
+          if (token) headers.Authorization = `Bearer ${token}`;
+          const res = await fetch(`https://api.github.com/repos/${repo}/contents/content.json?ref=main`, { headers });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          const decoded = new TextDecoder().decode(Uint8Array.from(atob(json.content.replace(/\n/g, "")), (c) => c.charCodeAt(0)));
+          data = JSON.parse(decoded);
+          selectedIdx = 0;
+          saveDraft();
+          render();
+          setStatus("已从 GitHub 成功拉取最新数据！", "ok");
+        } catch (err) {
+          setStatus(`拉取失败：${err.message}（请检查仓库名与 Token 权限）`, "err");
+        }
+      });
+
+      document.getElementById("btn-publish").addEventListener("click", async () => {
+        const token = tokenInput.value.trim();
+        const repo = repoInput.value.trim();
+        if (!token) return setStatus("请先在上方粘贴你的 GitHub Token（Contents: Read & Write 权限）。", "err");
+        if (!repo) return setStatus("请填写目标仓库。", "err");
+
+        setStatus("正在提交 content.json 到 GitHub main 分支...");
+        try {
+          const apiUrl = `https://api.github.com/repos/${repo}/contents/content.json`;
+          const headers = {
+            Accept: "application/vnd.github+json",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          };
+
+          // 1. Get current file SHA (if exists)
+          let sha = undefined;
+          const getRes = await fetch(`${apiUrl}?ref=main`, { headers });
+          if (getRes.ok) {
+            const existing = await getRes.json();
+            sha = existing.sha;
+          }
+
+          // 2. Commit updated content.json
+          const payload = {
+            message: `Update sanctuary content (${new Date().toISOString().slice(0, 16).replace("T", " ")})`,
+            content: toBase64Utf8(JSON.stringify(data, null, 2) + "\n"),
+            branch: "main"
+          };
+          if (sha) payload.sha = sha;
+
+          const putRes = await fetch(apiUrl, { method: "PUT", headers, body: JSON.stringify(payload) });
+          if (!putRes.ok) {
+            const errBody = await putRes.text();
+            throw new Error(`HTTP ${putRes.status} - ${errBody.slice(0, 160)}`);
+          }
+          setStatus("✦ 发布成功！已提交到 GitHub main 分支，约 1 分钟后全网生效。", "ok");
+        } catch (err) {
+          setStatus(`发布失败：${err.message}`, "err");
+        }
+      });
+
+      loadInitialData();
+    })();
+  </script>
+</body>
+</html>

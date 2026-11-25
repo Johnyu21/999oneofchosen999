@@ -15,13 +15,8 @@
       gap: 16px;
     }
 
-    .dispatch-card {
-      cursor: pointer;
-    }
-
-    .dispatch-card.is-hidden {
-      display: none;
-    }
+    .dispatch-card { cursor: pointer; }
+    .dispatch-card.is-hidden { display: none; }
 
     .dispatch-top {
       display: flex;
@@ -36,9 +31,7 @@
       color: var(--ink-faint);
     }
 
-    .dispatch-num {
-      color: var(--gold-accent);
-    }
+    .dispatch-num { color: var(--gold-accent); }
 
     .dispatch-card h3 {
       margin: 0 0 8px;
@@ -70,7 +63,6 @@
       color: var(--core-blue);
     }
 
-    /* Reading Modal */
     .reader-overlay {
       position: fixed;
       inset: 0;
@@ -97,16 +89,12 @@
       overflow-y: auto;
       padding: 32px 34px;
       background: rgba(248, 252, 254, 0.97);
-      border: 1px solid rgba(65, 111, 137, 0.36);
-      border-top: 2px solid var(--gold-accent);
       box-shadow: 0 24px 60px rgba(21, 35, 45, 0.18);
       transform: translateY(10px);
       transition: transform 0.25s ease;
     }
 
-    .reader-overlay.is-open .reader-sheet {
-      transform: translateY(0);
-    }
+    .reader-overlay.is-open .reader-sheet { transform: translateY(0); }
 
     .reader-head {
       display: flex;
@@ -160,7 +148,6 @@
   </style>
 </head>
 <body class="layout-left-offset theme-style-2">
-  <!-- Right Profile Atmospheric Backdrop -->
   <div class="sanctuary-bg" aria-hidden="true">
     <img src="./angel-right.jpg" alt="">
   </div>
@@ -183,7 +170,7 @@
     <section class="page-header">
       <div class="page-eyebrow">SEAL IV // LOGOS · 汲取</div>
       <h1 class="page-title">铭文<span class="en">Scripturae Technicae</span></h1>
-      <p class="page-lead">架构笔记、AI 实践与深度手稿。</p>
+      <p class="page-lead">个人博客文章与短札 —— 感悟 · 技巧 · 经验。</p>
     </section>
 
     <blockquote class="epigraph">
@@ -192,66 +179,14 @@
       <cite class="epigraph-src">✦ ECCLESIASTES I : IX · 传道书 / ODYSSEY</cite>
     </blockquote>
 
-    <div class="filter-bar" role="group" aria-label="手稿筛选">
-      <button class="filter-btn is-active" data-topic="all" type="button">✦ ALL · 全部残卷</button>
-      <button class="filter-btn" data-topic="visual" type="button">LUX · 光影视觉</button>
-      <button class="filter-btn" data-topic="ai" type="button">NOUS · 灵智实践</button>
-      <button class="filter-btn" data-topic="deploy" type="button">BASIS · 圣殿工程</button>
+    <div class="filter-bar" role="group" aria-label="文章分类筛选">
+      <button class="filter-btn is-active" data-topic="all" type="button">✦ ALL · 全部文章</button>
+      <button class="filter-btn" data-topic="reflection" type="button">感悟 · REFLECTIONS</button>
+      <button class="filter-btn" data-topic="craft" type="button">技巧 · CRAFT</button>
+      <button class="filter-btn" data-topic="experience" type="button">经验 · EXPERIENCE</button>
     </div>
 
-    <section class="dispatch-list">
-      <article class="glass-panel dispatch-card interactive-card" data-topic="visual" data-id="0">
-        <div class="dispatch-top">
-          <span class="dispatch-num">TABLET I // LUX</span>
-          <span>ANNO MMXXVI</span>
-        </div>
-        <h3>白昼之光与冷银秩序：高明度圣殿视觉手记</h3>
-        <p>当赛博空间不再藏身于廉价的黑底霓虹，如何在冷白画布上借哥特黑体、圣银细线与微粒层次立起肃穆感。</p>
-        <div class="dispatch-foot">
-          <div><span class="tag-chip">#神话赛博</span> <span class="tag-chip">#圣尘粒子</span></div>
-          <span class="read-hint">UNSEAL SCROLL ↗</span>
-        </div>
-      </article>
-
-      <article class="glass-panel dispatch-card interactive-card" data-topic="visual" data-id="1">
-        <div class="dispatch-top">
-          <span class="dispatch-num">TABLET II // FERRUM</span>
-          <span>ANNO MMXXVI</span>
-        </div>
-        <h3>圣银十字剑光标：零延迟剑尖与微光铸造录</h3>
-        <p>放弃易糊的位图指针，以内联矢量路径重铸十字细剑，使剑尖与真实落点毫秒不差。</p>
-        <div class="dispatch-foot">
-          <div><span class="tag-chip">#SVG矢量</span> <span class="tag-chip">#微交互</span></div>
-          <span class="read-hint">UNSEAL SCROLL ↗</span>
-        </div>
-      </article>
-
-      <article class="glass-panel dispatch-card interactive-card" data-topic="ai" data-id="2">
-        <div class="dispatch-top">
-          <span class="dispatch-num">TABLET III // NOUS</span>
-          <span>ANNO MMXXVI</span>
-        </div>
-        <h3>从正面圣像到四方位化身：多视角一致性的秘仪</h3>
-        <p>以单帧正视图为母印，借光影、材质与构图锚点，生成正面、左翼、背脊与右翼四位一体的机械天使。</p>
-        <div class="dispatch-foot">
-          <div><span class="tag-chip">#AI-Agent</span> <span class="tag-chip">#多视角</span></div>
-          <span class="read-hint">UNSEAL SCROLL ↗</span>
-        </div>
-      </article>
-
-      <article class="glass-panel dispatch-card interactive-card" data-topic="deploy" data-id="3">
-        <div class="dispatch-top">
-          <span class="dispatch-num">TABLET IV // BASIS</span>
-          <span>ANNO MMXXVI</span>
-        </div>
-        <h3>零服务器圣殿：GitHub Pages 路径与缓存破除录</h3>
-        <p>无须长明之机房，仅凭静态文件、相对路径与版本印记，即可于星海之上永续悬停。</p>
-        <div class="dispatch-foot">
-          <div><span class="tag-chip">#静态圣殿</span> <span class="tag-chip">#GitHub-Pages</span></div>
-          <span class="read-hint">UNSEAL SCROLL ↗</span>
-        </div>
-      </article>
-    </section>
+    <section class="dispatch-list" id="dispatch-list"></section>
 
     <footer class="page-footer">
       <span>SEAL IV // NIHIL SUB SOLE NOVUM</span>
@@ -259,7 +194,6 @@
     </footer>
   </main>
 
-  <!-- Full-Article Reading Modal -->
   <div class="reader-overlay" id="reader-overlay" aria-hidden="true">
     <div class="reader-sheet" role="dialog" aria-modal="true" aria-labelledby="reader-title">
       <div class="reader-head">
@@ -275,49 +209,89 @@
 
   <script src="./sanctuary.js?v=6"></script>
   <script>
-    (function () {
-      const articles = [
-        {
-          meta: "TABLET I // LUX · 光影手记",
-          title: "白昼之光与冷银秩序：高明度圣殿视觉手记",
-          html: `
-            <p>世人论及机械与赛博，多沉溺于黑底与刺目霓虹；然真正的神性往往栖居于极高明度的白昼与冷银之中。</p>
-            <h4>一、字形即仪式</h4>
-            <p>以哥特黑体（UnifrakturMaguntia）镌刻圣殿名讳，以宋体承接汉文语境，以等宽字标注经纬坐标——古典经卷与精密仪器的张力便由此而生。</p>
-            <h4>二、浅幕之上的微粒</h4>
-            <p>纯白尘埃会消融于冷白底色。唯有将颗粒压至深钢蓝与古铜鎏金，并改用离线预渲染光晕贴图，方能在不耗损帧率的前提下浮现教堂光柱般的微尘。</p>
-          `
-        },
-        {
-          meta: "TABLET II // FERRUM · 铸剑手记",
-          title: "圣银十字剑光标：零延迟剑尖与微光铸造录",
-          html: `
-            <p>系统原生光标受限于位图尺寸，难以承载细剑的锋芒与呼吸感。改由独立内联 SVG 随指针坐标直出，剑尖便能精准落于点击热点。</p>
-            <pre>sword.style.transform = \`translate3d(\${px - 2.3}px, \${py - 2.3}px, 0)\`;</pre>
-            <p>剑身不加插值延迟，仅令冰蓝光晕缓步尾随——既有器物之利，亦有圣光之余韵。</p>
-          `
-        },
-        {
-          meta: "TABLET III // NOUS · 造像手记",
-          title: "从正面圣像到四方位化身：多视角一致性的秘仪",
-          html: `
-            <p>欲使圣殿四印各执一方视角，最忌换角而易容。唯有锁定三道不变之锚：</p>
-            <p>其一，始终以无遮挡之正面原帧为母印；其二，严守哥特尖顶双环光环、闭目瓷容与肩部涡轮关节之形制；其三，统一高明度冷白漫射天光，使四幕交叠时宛若静默转身。</p>
-          `
-        },
-        {
-          meta: "TABLET IV // BASIS · 基石手记",
-          title: "零服务器圣殿：GitHub Pages 路径与缓存破除录",
-          html: `
-            <p>凡非以用户名命名的项目仓库，皆悬于子路径之下。一切样式、脚本与画卷皆以 <code>./</code> 相对路径相系，方能在本地与云端毫无滞碍地展开。</p>
-            <pre>&lt;link rel="stylesheet" href="./sanctuary.css?v=4"&gt;</pre>
-            <p>每次修订仪轨，递进版本印记即可令旧缓存自动退散。</p>
-          `
-        }
-      ];
-
+    (async function () {
+      const listEl = document.getElementById("dispatch-list");
       const btns = document.querySelectorAll(".filter-btn");
-      const cards = document.querySelectorAll(".dispatch-card");
+      const overlay = document.getElementById("reader-overlay");
+      const metaEl = document.getElementById("reader-meta");
+      const titleEl = document.getElementById("reader-title");
+      const bodyEl = document.getElementById("reader-body");
+      const closeBtn = document.getElementById("reader-close");
+
+      const topicLabels = { reflection: "感悟", craft: "技巧", experience: "经验" };
+      const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+      function esc(str) {
+        return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+      }
+
+      // Lightweight formatter: supports ## headings, ```code``` blocks, and paragraphs
+      function formatBody(raw) {
+        const text = String(raw || "");
+        const parts = text.split(/```([\s\S]*?)```/g);
+        return parts.map((chunk, i) => {
+          if (i % 2 === 1) {
+            return `<pre><code>${esc(chunk.replace(/^\n+|\n+$/g, ""))}</code></pre>`;
+          }
+          return chunk.split(/\n\s*\n/).map((para) => {
+            const p = para.trim();
+            if (!p) return "";
+            if (p.startsWith("## ")) return `<h4>${esc(p.slice(3))}</h4>`;
+            return `<p>${esc(p).replace(/\n/g, "<br>")}</p>`;
+          }).join("");
+        }).join("");
+      }
+
+      let articles = [];
+      try {
+        const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
+        articles = data.articles || [];
+      } catch (err) {
+        listEl.innerHTML = '<div class="glass-panel">暂未加载到文章数据（请通过 HTTP/GitHub Pages 访问）。</div>';
+        return;
+      }
+
+      listEl.innerHTML = articles.map((a, idx) => {
+        const label = topicLabels[a.topic] || "铭文";
+        return `
+          <article class="glass-panel dispatch-card interactive-card" data-topic="${esc(a.topic || "reflection")}" data-idx="${idx}">
+            <div class="dispatch-top">
+              <span class="dispatch-num">TABLET ${romans[idx] || (idx + 1)} // ${esc(label)}</span>
+              <span>${esc(a.date || "")}</span>
+            </div>
+            <h3>${esc(a.title)}</h3>
+            <p>${esc(a.summary)}</p>
+            <div class="dispatch-foot">
+              <div>${(a.tags || []).map((t) => `<span class="tag-chip">#${esc(t)}</span>`).join(" ")}</div>
+              <span class="read-hint">UNSEAL SCROLL ↗</span>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      function openArticle(idx) {
+        const a = articles[idx];
+        if (!a) return;
+        const label = topicLabels[a.topic] || "铭文";
+        metaEl.textContent = `TABLET ${romans[idx] || (idx + 1)} // ${label} · ${a.date || ""}`;
+        titleEl.textContent = a.title;
+        bodyEl.innerHTML = formatBody(a.body);
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeArticle() {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        if (window.location.hash) history.replaceState(null, "", window.location.pathname);
+      }
+
+      const cards = listEl.querySelectorAll(".dispatch-card");
+      cards.forEach((card) => {
+        card.addEventListener("click", () => openArticle(Number(card.dataset.idx)));
+      });
+
       btns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const t = btn.dataset.topic;
@@ -326,37 +300,16 @@
         });
       });
 
-      const overlay = document.getElementById("reader-overlay");
-      const metaEl = document.getElementById("reader-meta");
-      const titleEl = document.getElementById("reader-title");
-      const bodyEl = document.getElementById("reader-body");
-      const closeBtn = document.getElementById("reader-close");
-
-      function openArticle(idx) {
-        const a = articles[idx];
-        if (!a) return;
-        metaEl.textContent = a.meta;
-        titleEl.textContent = a.title;
-        bodyEl.innerHTML = a.html;
-        overlay.classList.add("is-open");
-        overlay.setAttribute("aria-hidden", "false");
-      }
-
-      function closeArticle() {
-        overlay.classList.remove("is-open");
-        overlay.setAttribute("aria-hidden", "true");
-      }
-
-      cards.forEach((card) => {
-        card.addEventListener("click", () => openArticle(Number(card.dataset.id)));
-      });
       closeBtn.addEventListener("click", closeArticle);
-      overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) closeArticle();
-      });
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeArticle();
-      });
+      overlay.addEventListener("click", (e) => { if (e.target === overlay) closeArticle(); });
+      window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeArticle(); });
+
+      // Deep-link support from taxonomy.html (#article-id)
+      if (window.location.hash) {
+        const targetId = decodeURIComponent(window.location.hash.slice(1));
+        const matchIdx = articles.findIndex((a) => a.id === targetId);
+        if (matchIdx >= 0) openArticle(matchIdx);
+      }
     })();
   </script>
 </body>

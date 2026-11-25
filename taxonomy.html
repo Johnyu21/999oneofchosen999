@@ -20,13 +20,11 @@
     .pillar-card {
       text-align: left;
       width: 100%;
-      padding: 18px 20px;
     }
 
     .pillar-card.is-selected {
-      border-color: var(--core-blue);
-      background: rgba(255, 255, 255, 0.92);
-      border-left: 3px solid var(--gold-accent);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 10px 26px rgba(65, 111, 137, 0.14);
     }
 
     .pillar-num {
@@ -85,10 +83,9 @@
 
     .entry-row {
       display: grid;
-      grid-template-columns: 96px 1fr auto;
+      grid-template-columns: 104px 1fr auto;
       gap: 16px;
       align-items: center;
-      padding: 15px 20px;
       text-decoration: none;
       color: var(--ink);
     }
@@ -100,7 +97,7 @@
     .entry-cat {
       font-family: var(--font-mono);
       font-size: 10px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       color: var(--gold-accent);
     }
 
@@ -125,7 +122,6 @@
   </style>
 </head>
 <body class="layout-right-offset theme-style-2">
-  <!-- Left Profile Atmospheric Backdrop -->
   <div class="sanctuary-bg" aria-hidden="true">
     <img src="./angel-left.jpg" alt="">
   </div>
@@ -148,79 +144,45 @@
     <section class="page-header">
       <div class="page-eyebrow">SEAL II // COSMOS · 宇宙</div>
       <h1 class="page-title">谱系<span class="en">Tabula Cosmica</span></h1>
-      <p class="page-lead">分类与标签星图。</p>
+      <p class="page-lead">为「造物志」项目与「铭文」文章立序：项目 · 感悟 · 技巧 · 经验。</p>
     </section>
 
     <blockquote class="epigraph">
       <p class="epigraph-latin">“Quod est inferius est sicut quod est superius.”</p>
-      <p class="epigraph-zh">「如其在上，如其在下；以成太一之奇迹。」—— 斯拉夫古神韦莱斯（Veles）司掌幽冥与秘典，诸星之名皆归于此册。</p>
+      <p class="epigraph-zh">「如其在上，如其在下；以成太一之奇迹。」—— 斯拉夫古神韦莱斯（Veles）司掌幽冥与秘典，诸卷之名皆归于此册。</p>
       <cite class="epigraph-src">✦ TABULA SMARAGDINA · 翠玉录 / SLAVIC MYTHOS</cite>
     </blockquote>
 
-    <section class="pillar-grid">
+    <section class="pillar-grid" id="pillar-grid">
       <button class="glass-panel pillar-card interactive-card is-selected" data-cat="all" type="button">
-        <div class="pillar-num"><span>OMNIA</span><span>06</span></div>
-        <h3>诸界总览</h3>
-        <p>万象归一，展开全部星域卷宗。</p>
+        <div class="pillar-num"><span>OMNIA</span><span data-count="all">00</span></div>
+        <h3>全部卷宗</h3>
+        <p>一览「造物志」项目与「铭文」全部文章。</p>
       </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="ai" type="button">
-        <div class="pillar-num"><span>SPHERE I</span><span>02</span></div>
-        <h3>灵智之域 · AI</h3>
-        <p>智能体神谕、多视角造像与自动仪轨。</p>
+      <button class="glass-panel pillar-card interactive-card" data-cat="project" type="button">
+        <div class="pillar-num"><span>SPHERE I</span><span data-count="project">00</span></div>
+        <h3>项目 · Projects</h3>
+        <p>归档开源项目与在线 Demo 作品。</p>
       </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="visual" type="button">
-        <div class="pillar-num"><span>SPHERE II</span><span>02</span></div>
-        <h3>光影圣仪 · 视觉</h3>
-        <p>冷白银辉、圣尘粒子与矢量圣剑。</p>
+      <button class="glass-panel pillar-card interactive-card" data-cat="reflection" type="button">
+        <div class="pillar-num"><span>SPHERE II</span><span data-count="reflection">00</span></div>
+        <h3>感悟 · Reflections</h3>
+        <p>思考碎片、审美判断与灵感短札。</p>
       </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="infra" type="button">
-        <div class="pillar-num"><span>SPHERE III</span><span>02</span></div>
-        <h3>界域基石 · 工程</h3>
-        <p>静态圣殿架构与星海部署律法。</p>
+      <button class="glass-panel pillar-card interactive-card" data-cat="craft" type="button">
+        <div class="pillar-num"><span>SPHERE III</span><span data-count="craft">00</span></div>
+        <h3>技巧 · Craft</h3>
+        <p>AI 提示词心法、终端命令与效率利技。</p>
+      </button>
+      <button class="glass-panel pillar-card interactive-card" data-cat="experience" type="button">
+        <div class="pillar-num"><span>SPHERE IV</span><span data-count="experience">00</span></div>
+        <h3>经验 · Experience</h3>
+        <p>后端架构、自动化脚本与真实踩坑复盘。</p>
       </button>
     </section>
 
-    <div class="tag-cloud" role="group" aria-label="星标筛选">
-      <button class="tag-btn is-active" data-tag="all" type="button">✦ ALL</button>
-      <button class="tag-btn" data-tag="ai-agent" type="button">#AI-Agent</button>
-      <button class="tag-btn" data-tag="visual" type="button">#神话赛博</button>
-      <button class="tag-btn" data-tag="svg" type="button">#SVG矢量</button>
-      <button class="tag-btn" data-tag="canvas" type="button">#圣尘粒子</button>
-      <button class="tag-btn" data-tag="pages" type="button">#静态圣殿</button>
-    </div>
-
-    <section class="index-entries" id="entry-list">
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="visual" data-tags="visual,canvas">
-        <span class="entry-cat">SPHERE II</span>
-        <span class="entry-title">白昼之光与冷银秩序：高明度圣殿视觉手记</span>
-        <span class="entry-tags"><span class="tag-chip">#神话赛博</span><span class="tag-chip">#圣尘粒子</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="visual" data-tags="svg,visual">
-        <span class="entry-cat">SPHERE II</span>
-        <span class="entry-title">圣银十字剑光标：零延迟剑尖与微光铸造录</span>
-        <span class="entry-tags"><span class="tag-chip">#SVG矢量</span><span class="tag-chip">#神话赛博</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="ai" data-tags="ai-agent,visual">
-        <span class="entry-cat">SPHERE I</span>
-        <span class="entry-title">从正面圣像到四方位化身：多视角一致性的秘仪</span>
-        <span class="entry-tags"><span class="tag-chip">#AI-Agent</span><span class="tag-chip">#神话赛博</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./relics.html" data-cat="ai" data-tags="ai-agent">
-        <span class="entry-cat">SPHERE I</span>
-        <span class="entry-title">本地技能圣库与智能体协同仪轨</span>
-        <span class="entry-tags"><span class="tag-chip">#AI-Agent</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./oracle.html" data-cat="infra" data-tags="pages">
-        <span class="entry-cat">SPHERE III</span>
-        <span class="entry-title">零服务器圣殿：GitHub Pages 路径与缓存破除录</span>
-        <span class="entry-tags"><span class="tag-chip">#静态圣殿</span></span>
-      </a>
-      <a class="glass-panel entry-row" href="./relics.html" data-cat="infra" data-tags="pages,canvas">
-        <span class="entry-cat">SPHERE III</span>
-        <span class="entry-title">999one of chosen999 四视角圣殿母体</span>
-        <span class="entry-tags"><span class="tag-chip">#静态圣殿</span><span class="tag-chip">#圣尘粒子</span></span>
-      </a>
-    </section>
+    <div class="tag-cloud" id="tag-cloud" role="group" aria-label="星标筛选"></div>
+    <section class="index-entries" id="entry-list"></section>
 
     <footer class="page-footer">
       <span>SEAL II // QUOD EST INFERIUS</span>
@@ -230,17 +192,72 @@
 
   <script src="./sanctuary.js?v=6"></script>
   <script>
-    (function () {
+    (async function () {
+      const catNames = { project: "项目", reflection: "感悟", craft: "技巧", experience: "经验" };
+      const tagCloud = document.getElementById("tag-cloud");
+      const entryList = document.getElementById("entry-list");
+      const pillars = document.querySelectorAll(".pillar-card");
+
       let currentCat = "all";
       let currentTag = "all";
-      const pillars = document.querySelectorAll(".pillar-card");
-      const tagBtns = document.querySelectorAll(".tag-btn");
-      const rows = document.querySelectorAll(".entry-row");
+      let items = [];
+
+      function esc(str) {
+        return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+      }
+
+      try {
+        const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
+        const projects = (data.projects || []).map((p) => ({
+          cat: "project",
+          catLabel: p.kind === "demo" ? "项目 // DEMO" : "项目 // 开源",
+          title: p.title,
+          tags: p.tags || [],
+          href: "./relics.html"
+        }));
+        const articles = (data.articles || []).map((a) => ({
+          cat: a.topic || "reflection",
+          catLabel: `${catNames[a.topic] || "铭文"} // 卷`,
+          title: a.title,
+          tags: a.tags || [],
+          href: `./oracle.html#${encodeURIComponent(a.id || "")}`
+        }));
+        items = [...projects, ...articles];
+      } catch (err) {
+        entryList.innerHTML = '<div class="glass-panel">暂未加载到卷宗数据（请通过 HTTP/GitHub Pages 访问）。</div>';
+        return;
+      }
+
+      // Update counts
+      const counts = { all: items.length, project: 0, reflection: 0, craft: 0, experience: 0 };
+      items.forEach((it) => { if (counts[it.cat] !== undefined) counts[it.cat]++; });
+      Object.keys(counts).forEach((k) => {
+        const el = document.querySelector(`[data-count="${k}"]`);
+        if (el) el.textContent = String(counts[k]).padStart(2, "0");
+      });
+
+      // Build dynamic tag cloud
+      const allTags = Array.from(new Set(items.flatMap((it) => it.tags)));
+      tagCloud.innerHTML = `<button class="tag-btn is-active" data-tag="all" type="button">✦ ALL</button>` +
+        allTags.map((t) => `<button class="tag-btn" data-tag="${esc(t)}" type="button">#${esc(t)}</button>`).join("");
+
+      // Render entries
+      entryList.innerHTML = items.map((it) => `
+        <a class="glass-panel entry-row" href="${esc(it.href)}" data-cat="${esc(it.cat)}" data-tags="${esc(it.tags.join("|"))}">
+          <span class="entry-cat">${esc(it.catLabel)}</span>
+          <span class="entry-title">${esc(it.title)}</span>
+          <span class="entry-tags">${it.tags.map((t) => `<span class="tag-chip">#${esc(t)}</span>`).join("")}</span>
+        </a>
+      `).join("");
+
+      const rows = entryList.querySelectorAll(".entry-row");
+      const tagBtns = tagCloud.querySelectorAll(".tag-btn");
 
       function applyFilter() {
         rows.forEach((row) => {
           const catMatch = currentCat === "all" || row.dataset.cat === currentCat;
-          const tags = (row.dataset.tags || "").split(",");
+          const tags = (row.dataset.tags || "").split("|").filter(Boolean);
           const tagMatch = currentTag === "all" || tags.includes(currentTag);
           row.classList.toggle("is-hidden", !(catMatch && tagMatch));
         });
