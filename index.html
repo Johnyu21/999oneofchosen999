@@ -1252,6 +1252,28 @@
         link.addEventListener("mouseleave", () => setSyncedPortal(null));
       });
 
+      // Secret 5-tap portal on top-left brand title -> ./sanctum.html (zero extra UI buttons)
+      const brandTitleEl = document.querySelector(".brand-title");
+      if (brandTitleEl) {
+        let tapCount = 0;
+        let tapTimer = null;
+        brandTitleEl.addEventListener("click", () => {
+          tapCount++;
+          clearTimeout(tapTimer);
+          if (tapCount >= 5) {
+            tapCount = 0;
+            document.body.classList.add("is-leaving");
+            setTimeout(() => {
+              window.location.href = "./sanctum.html";
+            }, 220);
+            return;
+          }
+          tapTimer = setTimeout(() => {
+            tapCount = 0;
+          }, 2200);
+        });
+      }
+
       // Smooth water-dissolve page transition on internal links
       window.addEventListener("pageshow", () => {
         document.body.classList.remove("is-leaving");
