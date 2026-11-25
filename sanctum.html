@@ -349,17 +349,36 @@
         return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
       }
 
+      const LEGACY_TOPIC = { reflection: "感悟", craft: "技巧", experience: "经验" };
+      const LEGACY_KIND = { opensource: "开源项目", demo: "Demo 项目" };
+
+      function normalizeTopic(val) {
+        const v = String(val || "").trim();
+        return LEGACY_TOPIC[v] || v || "未分类";
+      }
+
+      function normalizeKind(val) {
+        const v = String(val || "").trim();
+        return LEGACY_KIND[v] || v || "未分类";
+      }
+
+      function normalizeData(d) {
+        (d.articles || []).forEach((a) => { a.topic = normalizeTopic(a.topic); });
+        (d.projects || []).forEach((p) => { p.kind = normalizeKind(p.kind); });
+        return d;
+      }
+
       async function loadInitialData() {
         try {
           const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
           if (res.ok) {
-            data = await res.json();
+            data = normalizeData(await res.json());
             setStatus("已加载站点当前 content.json 数据。", "ok");
           }
         } catch (e) {
           const cached = localStorage.getItem(DRAFT_KEY);
           if (cached) {
-            data = JSON.parse(cached);
+            data = normalizeData(JSON.parse(cached));
             setStatus("已加载本地草稿数据。");
           }
         }
@@ -371,11 +390,10 @@
         listHeading.textContent = currentTab === "articles" ? `博客文章（${list.length}）` : `项目列表（${list.length}）`;
         if (selectedIdx >= list.length) selectedIdx = Math.max(0, list.length - 1);
 
-        const topicMap = { reflection: "感悟", craft: "技巧", experience: "经验" };
         listEl.innerHTML = list.map((item, i) => {
           const meta = currentTab === "articles"
-            ? `${topicMap[item.topic] || "文章"} // ${item.date || ""}`
-            : `${item.kind === "demo" ? "DEMO" : "开源项目"} // ${item.status || "LIVE"}`;
+            ? `${normalizeTopic(item.topic)} // ${item.date || ""}`
+            : `${normalizeKind(item.kind)} // ${item.status || "LIVE"}`;
           return `
             <div class="list-card ${i === selectedIdx ? "is-selected" : ""}" data-idx="${i}">
               <div class="list-card-meta">${esc(meta)}</div>
@@ -404,7 +422,8 @@
         }
 
         if (currentTab === "articles") {
-          editorHeading.textContent = "编辑博客文章（自动同步至 II. 谱系 & IV. 铭文）";
+          const existingTopics = Array.from(new Set(["感悟", "技巧", "经验", ...data.articles.map((a) => normalizeTopic(a.topic)).filter(Boolean)]));
+          editorHeading.textContent = "编辑博客文章（自定义分类将自动同步至 II. 谱系 & IV. 铭文）";
           editorForm.innerHTML = `
             <div class="form-grid">
               <div>
@@ -413,12 +432,11 @@
               </div>
               <div class="row-2">
                 <div>
-                  <label>分类（对应 II. 谱系 与 IV. 铭文）</label>
-                  <select id="f-topic">
-                    <option value="reflection" ${item.topic === "reflection" ? "selected" : ""}>感悟</option>
-                    <option value="craft" ${item.topic === "craft" ? "selected" : ""}>技巧</option>
-                    <option value="experience" ${item.topic === "experience" ? "selected" : ""}>经验</option>
-                  </select>
+                  <label>自定义分类（可选已有或直接输入新分类名）</label>
+                  <input id="f-topic" list="topic-options" value="${esc(normalizeTopic(item.topic))}" placeholder="例如：感悟、技巧、经验、随笔…">
+                  <datalist id="topic-options">
+                    ${existingTopics.map((t) => `<option value="${esc(t)}"></option>`).join("")}
+                  </datalist>
                 </div>
                 <div>
                   <label>日期（如 2026.11）</label>
@@ -447,20 +465,23 @@
 
           const bind = () => {
             item.title = document.getElementById("f-title").value;
-            item.topic = document.getElementById("f-topic").value;
+            item.topic = document.getElementById("f-topic").value.trim() || "未分类";
             item.date = document.getElementById("f-date").value;
             item.tags = document.getElementById("f-tags").value.split(/[,，]/).map((s) => s.trim()).filter(Boolean);
             item.summary = document.getElementById("f-summary").value;
             item.body = document.getElementById("f-body").value;
             saveDraft();
             const activeTitle = listEl.querySelector(".list-card.is-selected .list-card-title");
+            const activeMeta = listEl.querySelector(".list-card.is-selected .list-card-meta");
             if (activeTitle) activeTitle.textContent = item.title || "未命名";
+            if (activeMeta) activeMeta.textContent = `${item.topic} // ${item.date || ""}`;
           };
           ["f-title", "f-topic", "f-date", "f-tags", "f-summary", "f-body"].forEach((id) => {
             document.getElementById(id).addEventListener("input", bind);
           });
         } else {
-          editorHeading.textContent = "编辑项目链接（自动同步至 II. 谱系 & III. 造物志）";
+          const existingKinds = Array.from(new Set(["开源项目", "Demo 项目", ...data.projects.map((p) => normalizeKind(p.kind)).filter(Boolean)]));
+          editorHeading.textContent = "编辑项目链接（自定义分类将自动同步至 II. 谱系 & III. 造物志）";
           editorForm.innerHTML = `
             <div class="form-grid">
               <div>
@@ -469,11 +490,11 @@
               </div>
               <div class="row-2">
                 <div>
-                  <label>项目类型</label>
-                  <select id="f-kind">
-                    <option value="opensource" ${item.kind === "opensource" ? "selected" : ""}>开源项目</option>
-                    <option value="demo" ${item.kind === "demo" ? "selected" : ""}>Demo 项目</option>
-                  </select>
+                  <label>自定义项目分类（可选已有或直接输入新分类名）</label>
+                  <input id="f-kind" list="kind-options" value="${esc(normalizeKind(item.kind))}" placeholder="例如：开源项目、Demo 项目、AI 工具…">
+                  <datalist id="kind-options">
+                    ${existingKinds.map((k) => `<option value="${esc(k)}"></option>`).join("")}
+                  </datalist>
                 </div>
                 <div>
                   <label>状态徽章（如 LIVE / DEMO / FORGING）</label>
@@ -508,7 +529,7 @@
 
           const bind = () => {
             item.title = document.getElementById("f-title").value;
-            item.kind = document.getElementById("f-kind").value;
+            item.kind = document.getElementById("f-kind").value.trim() || "未分类";
             item.status = document.getElementById("f-status").value;
             item.url = document.getElementById("f-url").value;
             item.linkLabel = document.getElementById("f-linkLabel").value;
@@ -516,7 +537,9 @@
             item.desc = document.getElementById("f-desc").value;
             saveDraft();
             const activeTitle = listEl.querySelector(".list-card.is-selected .list-card-title");
+            const activeMeta = listEl.querySelector(".list-card.is-selected .list-card-meta");
             if (activeTitle) activeTitle.textContent = item.title || "未命名";
+            if (activeMeta) activeMeta.textContent = `${item.kind} // ${item.status || "LIVE"}`;
           };
           ["f-title", "f-kind", "f-status", "f-url", "f-linkLabel", "f-tags", "f-desc"].forEach((id) => {
             document.getElementById(id).addEventListener("input", bind);
@@ -562,7 +585,7 @@
           const ym = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}`;
           data.articles.unshift({
             id,
-            topic: "reflection",
+            topic: "感悟",
             date: ym,
             title: "新铭文短札",
             summary: "一句话概括核心洞察或踩坑结论。",
@@ -572,7 +595,7 @@
         } else {
           data.projects.unshift({
             id,
-            kind: "opensource",
+            kind: "开源项目",
             title: "新项目名称",
             status: "LIVE",
             desc: "一句话介绍这个项目解决什么问题。",

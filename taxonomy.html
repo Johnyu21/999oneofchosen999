@@ -152,33 +152,7 @@
       <p class="epigraph-zh">「穹苍之律映于微尘，幽冥之典藏于星轨。」</p>
     </blockquote>
 
-    <section class="pillar-grid" id="pillar-grid">
-      <button class="glass-panel pillar-card interactive-card is-selected" data-cat="all" type="button">
-        <div class="pillar-num"><span>OMNIA</span><span data-count="all">00</span></div>
-        <h3>全部卷宗</h3>
-        <p>一览「造物志」项目与「铭文」全部文章。</p>
-      </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="project" type="button">
-        <div class="pillar-num"><span>SPHERE I</span><span data-count="project">00</span></div>
-        <h3>项目 · Projects</h3>
-        <p>归档开源项目与在线 Demo 作品。</p>
-      </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="reflection" type="button">
-        <div class="pillar-num"><span>SPHERE II</span><span data-count="reflection">00</span></div>
-        <h3>感悟 · Reflections</h3>
-        <p>思考碎片、审美判断与灵感短札。</p>
-      </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="craft" type="button">
-        <div class="pillar-num"><span>SPHERE III</span><span data-count="craft">00</span></div>
-        <h3>技巧 · Craft</h3>
-        <p>AI 提示词心法、终端命令与效率利技。</p>
-      </button>
-      <button class="glass-panel pillar-card interactive-card" data-cat="experience" type="button">
-        <div class="pillar-num"><span>SPHERE IV</span><span data-count="experience">00</span></div>
-        <h3>经验 · Experience</h3>
-        <p>后端架构、自动化脚本与真实踩坑复盘。</p>
-      </button>
-    </section>
+    <section class="pillar-grid" id="pillar-grid"></section>
 
     <div class="tag-cloud" id="tag-cloud" role="group" aria-label="星标筛选"></div>
     <section class="index-entries" id="entry-list"></section>
@@ -192,10 +166,12 @@
   <script src="./sanctuary.js?v=6"></script>
   <script>
     (async function () {
-      const catNames = { project: "项目", reflection: "感悟", craft: "技巧", experience: "经验" };
+      const pillarGrid = document.getElementById("pillar-grid");
       const tagCloud = document.getElementById("tag-cloud");
       const entryList = document.getElementById("entry-list");
-      const pillars = document.querySelectorAll(".pillar-card");
+      const legacyTopic = { reflection: "感悟", craft: "技巧", experience: "经验" };
+      const legacyKind = { opensource: "开源项目", demo: "Demo 项目" };
+      const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
       let currentCat = "all";
       let currentTag = "all";
@@ -208,48 +184,73 @@
       try {
         const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
-        const projects = (data.projects || []).map((p) => ({
-          cat: "project",
-          catLabel: p.kind === "demo" ? "项目 // DEMO" : "项目 // 开源",
-          title: p.title,
-          tags: p.tags || [],
-          href: "./relics.html"
-        }));
-        const articles = (data.articles || []).map((a) => ({
-          cat: a.topic || "reflection",
-          catLabel: `${catNames[a.topic] || "铭文"} // 卷`,
-          title: a.title,
-          tags: a.tags || [],
-          href: `./oracle.html#${encodeURIComponent(a.id || "")}`
-        }));
+        const projects = (data.projects || []).map((p) => {
+          const k = legacyKind[String(p.kind || "").trim()] || String(p.kind || "").trim() || "未分类";
+          return {
+            catKey: `project:${k}`,
+            catName: k,
+            source: "III. 造物志",
+            catLabel: `造物 // ${k}`,
+            title: p.title,
+            tags: p.tags || [],
+            href: "./relics.html"
+          };
+        });
+        const articles = (data.articles || []).map((a) => {
+          const t = legacyTopic[String(a.topic || "").trim()] || String(a.topic || "").trim() || "未分类";
+          return {
+            catKey: `article:${t}`,
+            catName: t,
+            source: "IV. 铭文",
+            catLabel: `铭文 // ${t}`,
+            title: a.title,
+            tags: a.tags || [],
+            href: `./oracle.html#${encodeURIComponent(a.id || "")}`
+          };
+        });
         items = [...projects, ...articles];
       } catch (err) {
         entryList.innerHTML = '<div class="glass-panel">暂未加载到卷宗数据（请通过 HTTP/GitHub Pages 访问）。</div>';
         return;
       }
 
-      // Update counts
-      const counts = { all: items.length, project: 0, reflection: 0, craft: 0, experience: 0 };
-      items.forEach((it) => { if (counts[it.cat] !== undefined) counts[it.cat]++; });
-      Object.keys(counts).forEach((k) => {
-        const el = document.querySelector(`[data-count="${k}"]`);
-        if (el) el.textContent = String(counts[k]).padStart(2, "0");
+      // Dynamically discover all custom categories from III. 造物志 & IV. 铭文
+      const catMap = new Map();
+      items.forEach((it) => {
+        if (!catMap.has(it.catKey)) {
+          catMap.set(it.catKey, { key: it.catKey, name: it.catName, source: it.source, count: 0 });
+        }
+        catMap.get(it.catKey).count++;
       });
+      const categories = Array.from(catMap.values());
 
-      // Build dynamic tag cloud
+      pillarGrid.innerHTML = `
+        <button class="glass-panel pillar-card interactive-card is-selected" data-cat="all" type="button">
+          <div class="pillar-num"><span>OMNIA</span><span>${String(items.length).padStart(2, "0")}</span></div>
+          <h3>全部卷宗</h3>
+          <p>自动汇聚「造物志」与「铭文」所有自定义分类。</p>
+        </button>
+      ` + categories.map((c, idx) => `
+        <button class="glass-panel pillar-card interactive-card" data-cat="${esc(c.key)}" type="button">
+          <div class="pillar-num"><span>SPHERE ${romans[idx] || (idx + 1)} · ${esc(c.source)}</span><span>${String(c.count).padStart(2, "0")}</span></div>
+          <h3>${esc(c.name)}</h3>
+          <p>归属于 ${esc(c.source)} 的「${esc(c.name)}」条目。</p>
+        </button>
+      `).join("");
+
       const allTags = Array.from(new Set(items.flatMap((it) => it.tags)));
       tagCloud.innerHTML = `<button class="tag-btn is-active" data-tag="all" type="button">✦ ALL</button>` +
         allTags.map((t) => `<button class="tag-btn" data-tag="${esc(t)}" type="button">#${esc(t)}</button>`).join("");
 
-      // Render entries
       entryList.innerHTML = items.map((it) => `
-        <a class="glass-panel entry-row" href="${esc(it.href)}" data-cat="${esc(it.cat)}" data-tags="${esc(it.tags.join("|"))}">
+        <a class="glass-panel entry-row" href="${esc(it.href)}" data-cat="${esc(it.catKey)}" data-tags="${esc(it.tags.join("|"))}">
           <span class="entry-cat">${esc(it.catLabel)}</span>
           <span class="entry-title">${esc(it.title)}</span>
           <span class="entry-tags">${it.tags.map((t) => `<span class="tag-chip">#${esc(t)}</span>`).join("")}</span>
         </a>
       `).join("");
 
+      const pillars = pillarGrid.querySelectorAll(".pillar-card");
       const rows = entryList.querySelectorAll(".entry-row");
       const tagBtns = tagCloud.querySelectorAll(".tag-btn");
 

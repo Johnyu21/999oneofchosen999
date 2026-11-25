@@ -122,11 +122,7 @@
       <p class="epigraph-zh">「凡器物之初，皆曾受天火淬炼；余烬未冷，造物不止。」</p>
     </blockquote>
 
-    <div class="filter-bar" role="group" aria-label="项目类型筛选">
-      <button class="filter-btn is-active" data-filter="all" type="button">✦ ALL · 全部项目</button>
-      <button class="filter-btn" data-filter="opensource" type="button">OPEN SOURCE · 开源项目</button>
-      <button class="filter-btn" data-filter="demo" type="button">DEMO · Demo 项目</button>
-    </div>
+    <div class="filter-bar" id="filter-bar" role="group" aria-label="项目类型筛选"></div>
 
     <section class="relic-grid" id="relic-grid"></section>
 
@@ -140,26 +136,36 @@
   <script>
     (async function () {
       const grid = document.getElementById("relic-grid");
-      const btns = document.querySelectorAll(".filter-btn");
+      const filterBar = document.getElementById("filter-bar");
       const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+      const legacyKind = { opensource: "开源项目", demo: "Demo 项目" };
 
       function esc(str) {
         return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+      }
+
+      function getKind(p) {
+        const raw = String(p.kind || "").trim();
+        return legacyKind[raw] || raw || "未分类";
       }
 
       try {
         const res = await fetch("./content.json?t=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
         const projects = data.projects || [];
+        const kinds = Array.from(new Set(projects.map(getKind)));
+
+        filterBar.innerHTML = `<button class="filter-btn is-active" data-filter="all" type="button">✦ ALL · 全部项目</button>` +
+          kinds.map((k) => `<button class="filter-btn" data-filter="${esc(k)}" type="button">${esc(k)}</button>`).join("");
 
         grid.innerHTML = projects.map((p, idx) => {
           const isExternal = /^https?:\/\//i.test(p.url || "");
-          const typeLabel = p.kind === "demo" ? "DEMO" : "OPEN SOURCE";
+          const kindName = getKind(p);
           return `
-            <article class="glass-panel relic-card" data-kind="${esc(p.kind || "opensource")}">
+            <article class="glass-panel relic-card" data-kind="${esc(kindName)}">
               <div>
                 <div class="relic-meta">
-                  <span class="relic-type">RELIC ${romans[idx] || (idx + 1)} // ${typeLabel}</span>
+                  <span class="relic-type">RELIC ${romans[idx] || (idx + 1)} // ${esc(kindName)}</span>
                   <span class="relic-status">${esc(p.status || "LIVE")}</span>
                 </div>
                 <h3>${esc(p.title)}</h3>
@@ -173,6 +179,7 @@
           `;
         }).join("");
 
+        const btns = filterBar.querySelectorAll(".filter-btn");
         const cards = grid.querySelectorAll(".relic-card");
         btns.forEach((btn) => {
           btn.addEventListener("click", () => {

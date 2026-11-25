@@ -178,12 +178,7 @@
       <p class="epigraph-zh">「日光之下并无新事；渡海者不语风浪，唯于沉默中刻下航标。」</p>
     </blockquote>
 
-    <div class="filter-bar" role="group" aria-label="文章分类筛选">
-      <button class="filter-btn is-active" data-topic="all" type="button">✦ ALL · 全部文章</button>
-      <button class="filter-btn" data-topic="reflection" type="button">感悟 · REFLECTIONS</button>
-      <button class="filter-btn" data-topic="craft" type="button">技巧 · CRAFT</button>
-      <button class="filter-btn" data-topic="experience" type="button">经验 · EXPERIENCE</button>
-    </div>
+    <div class="filter-bar" id="filter-bar" role="group" aria-label="文章分类筛选"></div>
 
     <section class="dispatch-list" id="dispatch-list"></section>
 
@@ -210,21 +205,25 @@
   <script>
     (async function () {
       const listEl = document.getElementById("dispatch-list");
-      const btns = document.querySelectorAll(".filter-btn");
+      const filterBar = document.getElementById("filter-bar");
       const overlay = document.getElementById("reader-overlay");
       const metaEl = document.getElementById("reader-meta");
       const titleEl = document.getElementById("reader-title");
       const bodyEl = document.getElementById("reader-body");
       const closeBtn = document.getElementById("reader-close");
 
-      const topicLabels = { reflection: "感悟", craft: "技巧", experience: "经验" };
+      const legacyTopic = { reflection: "感悟", craft: "技巧", experience: "经验" };
       const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
       function esc(str) {
         return String(str || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
       }
 
-      // Lightweight formatter: supports ## headings, ```code``` blocks, and paragraphs
+      function getTopic(a) {
+        const raw = String(a.topic || "").trim();
+        return legacyTopic[raw] || raw || "未分类";
+      }
+
       function formatBody(raw) {
         const text = String(raw || "");
         const parts = text.split(/```([\s\S]*?)```/g);
@@ -251,10 +250,14 @@
         return;
       }
 
+      const topics = Array.from(new Set(articles.map(getTopic)));
+      filterBar.innerHTML = `<button class="filter-btn is-active" data-topic="all" type="button">✦ ALL · 全部文章</button>` +
+        topics.map((t) => `<button class="filter-btn" data-topic="${esc(t)}" type="button">${esc(t)}</button>`).join("");
+
       listEl.innerHTML = articles.map((a, idx) => {
-        const label = topicLabels[a.topic] || "铭文";
+        const label = getTopic(a);
         return `
-          <article class="glass-panel dispatch-card interactive-card" data-topic="${esc(a.topic || "reflection")}" data-idx="${idx}">
+          <article class="glass-panel dispatch-card interactive-card" data-topic="${esc(label)}" data-idx="${idx}">
             <div class="dispatch-top">
               <span class="dispatch-num">TABLET ${romans[idx] || (idx + 1)} // ${esc(label)}</span>
               <span>${esc(a.date || "")}</span>
@@ -272,7 +275,7 @@
       function openArticle(idx) {
         const a = articles[idx];
         if (!a) return;
-        const label = topicLabels[a.topic] || "铭文";
+        const label = getTopic(a);
         metaEl.textContent = `TABLET ${romans[idx] || (idx + 1)} // ${label} · ${a.date || ""}`;
         titleEl.textContent = a.title;
         bodyEl.innerHTML = formatBody(a.body);
@@ -286,6 +289,7 @@
         if (window.location.hash) history.replaceState(null, "", window.location.pathname);
       }
 
+      const btns = filterBar.querySelectorAll(".filter-btn");
       const cards = listEl.querySelectorAll(".dispatch-card");
       cards.forEach((card) => {
         card.addEventListener("click", () => openArticle(Number(card.dataset.idx)));

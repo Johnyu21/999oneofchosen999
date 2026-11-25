@@ -2,39 +2,31 @@
   "projects": [
     {
       "id": "sanctuary-core",
-      "kind": "opensource",
+      "kind": "开源项目",
       "title": "999one of chosen999 · 圣殿母体",
       "status": "LIVE",
-      "desc": "纯静态零框架打造的四视角赛博个人站。",
-      "tags": [
-        "HTML5",
-        "GitHub Pages"
-      ],
+      "desc": "纯静态零框架打造的四视角宗教赛博个人站，容纳机械天使、教堂矢量边框与圣银十字剑指针。",
+      "tags": ["HTML5", "GitHub Pages"],
       "url": "https://github.com/Johnyu21/999oneofchosen999",
       "linkLabel": "GITHUB ↗"
     },
     {
       "id": "oss-placeholder",
-      "kind": "opensource",
+      "kind": "开源项目",
       "title": "待铸造 · 开源项目席位",
       "status": "PENDING",
       "desc": "可在隐藏后台直接替换为你的 GitHub 开源仓库链接与简介。",
-      "tags": [
-        "开源项目"
-      ],
+      "tags": ["开源项目"],
       "url": "https://github.com/Johnyu21",
       "linkLabel": "REPOS ↗"
     },
     {
       "id": "demo-placeholder-1",
-      "kind": "demo",
+      "kind": "Demo 项目",
       "title": "待启封 · Demo 项目席位",
       "status": "PENDING",
       "desc": "可在隐藏后台直接填入你的在线 Demo 或 AI 实验原型链接。",
-      "tags": [
-        "Demo",
-        "AI实践"
-      ],
+      "tags": ["Demo", "AI实践"],
       "url": "./index.html",
       "linkLabel": "DEMO ↗"
     }
@@ -42,26 +34,29 @@
   "articles": [
     {
       "id": "restraint-and-order",
-      "topic": "reflection",
+      "topic": "感悟",
       "date": "2026.11",
       "title": "克制即是神性：为何高明度冷白比霓虹更能承载秩序",
       "summary": "当元素不断叠加时，页面只会变得嘈杂。真正让人停驻的，往往是留白、秩序与克制。",
-      "tags": [
-        "感悟",
-        "美学"
-      ],
+      "tags": ["感悟", "美学"],
       "body": "世人论及机械与赛博，多沉溺于黑底与刺目霓虹；然真正的神性往往栖居于极高明度的白昼与冷银之中。\n\n## 一、留白即力量\n很多时候，删掉一个抢戏的特效，比再加三个炫酷动画更能提升整体质感。\n\n## 二、字形即仪式\n以哥特黑体镌刻圣殿名讳，以宋体承接汉文语境，以等宽字标注经纬坐标——古典经卷与精密仪器的张力便由此而生。"
     },
     {
+      "id": "agent-map-not-maze",
+      "topic": "技巧",
+      "date": "2026.11",
+      "title": "给 Agent 一张地图，而不是整座迷宫：上下文控制心法",
+      "summary": "驱动智能体干活时，最容易踩的坑不是提示词不够长，而是塞进了太多无关噪音。",
+      "tags": ["技巧", "AI实践"],
+      "body": "写 System Prompt 或编排多步 Agent 时，上下文窗口越干净，输出质量越稳。\n\n## 实操原则\n1. 先给清晰的目录结构与目标边界，让 Agent 按需读取文件；\n2. 把重复流程沉淀成独立 Skill，不要每次在对话里从头解释；\n3. 每次只推进一个明确子目标，验证通过后再进入下一步。"
+    },
+    {
       "id": "github-pages-notes",
-      "topic": "experience",
+      "topic": "经验",
       "date": "2026.11",
       "title": "静态圣殿的相对路径与缓存破除：GitHub Pages 避坑录",
       "summary": "项目子路径部署、CSS 强缓存失效与纯静态站点的零运维实践记录。",
-      "tags": [
-        "经验",
-        "后端工程"
-      ],
+      "tags": ["经验", "后端工程"],
       "body": "凡非以用户名命名的项目仓库，GitHub Pages 都会将其挂载在 /仓库名/ 子路径下。\n\n## 两条铁律\n1. 一切样式、脚本、图片与内部跳转一律使用 ./ 相对路径，这样本地双击和云端部署 100% 通用；\n2. 修改公共 CSS/JS 后，给引用链接递进版本号参数（例如 ?v=7），即可绕过浏览器强缓存。\n\n```\n<link rel=\"stylesheet\" href=\"./sanctuary.css?v=7\">\n```"
     }
   ]
