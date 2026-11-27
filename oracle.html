@@ -104,13 +104,20 @@
 
     .reader-head {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
+      flex-direction: column;
+      gap: 10px;
       padding-bottom: 16px;
       margin-bottom: 22px;
       border-bottom: 1px solid var(--line);
+    }
+
+    .reader-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      width: 100%;
     }
 
     .reader-tools {
@@ -118,6 +125,7 @@
       align-items: center;
       gap: 6px;
       flex-shrink: 0;
+      margin-left: auto;
     }
 
     .reader-tool-btn,
@@ -231,16 +239,16 @@
   <div class="reader-overlay" id="reader-overlay" aria-hidden="true">
     <div class="reader-sheet" id="reader-sheet" role="dialog" aria-modal="true" aria-labelledby="reader-title">
       <div class="reader-head">
-        <div>
-          <div class="page-eyebrow" id="reader-meta" style="margin-bottom: 6px;"></div>
-          <h2 id="reader-title" style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: 0.06em;"></h2>
+        <div class="reader-top-row">
+          <div class="page-eyebrow" id="reader-meta" style="margin-bottom: 0;"></div>
+          <div class="reader-tools">
+            <button class="reader-tool-btn" id="reader-font-dec" type="button" title="缩小字号">A-</button>
+            <button class="reader-tool-btn" id="reader-font-inc" type="button" title="放大字号">A+</button>
+            <button class="reader-tool-btn" id="reader-expand" type="button" title="放大/还原阅读窗">EXPAND ⤢</button>
+            <button class="reader-close" id="reader-close" type="button">SEAL [ESC]</button>
+          </div>
         </div>
-        <div class="reader-tools">
-          <button class="reader-tool-btn" id="reader-font-dec" type="button" title="缩小字号">A-</button>
-          <button class="reader-tool-btn" id="reader-font-inc" type="button" title="放大字号">A+</button>
-          <button class="reader-tool-btn" id="reader-expand" type="button" title="放大/还原阅读窗">EXPAND ⤢</button>
-          <button class="reader-close" id="reader-close" type="button">SEAL [ESC]</button>
-        </div>
+        <h2 id="reader-title" style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: 0.06em;"></h2>
       </div>
       <div class="reader-body" id="reader-body"></div>
       <section class="reader-comments" aria-label="访客点赞与评论">
